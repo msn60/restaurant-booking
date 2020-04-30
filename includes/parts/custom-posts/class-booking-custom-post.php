@@ -1,8 +1,8 @@
 <?php
 /**
- * Custom_Post1 abstract Class File
+ * Booking_Custom_Post abstract Class File
  *
- * This file contains contract for Custom_Post1 class. If you want create a
+ * This file contains contract for Booking_Custom_Post class. If you want create a
  * custom post type in WordPress, you must to use this contract.
  *
  * @package    Restaurant_Booking
@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Custom_Post1.
- * This file contains contract for Custom_Post1 class.
+ * Class Booking_Custom_Post.
+ * This file contains contract for Booking_Custom_Post class.
  *
  * @package    Restaurant_Booking
  * @author     Mehdi Soltani Neshan <soltani.n.mehdi@gmail.com>
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see        https://carlalexander.ca/designing-entities-wordpress-custom-post-types/
  * @see        https://www.hostinger.com/tutorials/wordpress-custom-post-types
  */
-class Custom_Post1 extends Custom_Post_Type {
+class Booking_Custom_Post extends Custom_Post_Type {
 
 	/**
 	 * The name of the product.
@@ -51,7 +51,7 @@ class Custom_Post1 extends Custom_Post_Type {
 	private $price;
 
 	/**
-	 * Custom_Post1 constructor.
+	 * Booking_Custom_Post constructor.
 	 *
 	 * @param array  $initial_values
 	 * @param string $name

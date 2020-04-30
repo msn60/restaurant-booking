@@ -199,10 +199,10 @@ class Initial_Value {
 	}
 
 	/**
-	 * Initial values for Custom_Post1 class
+	 * Initial values for Booking_Custom_Post class
 	 *
 	 * @access public
-	 * @return array It returns all of arguments that Custom_Post1 class needs.
+	 * @return array It returns all of arguments that Booking_Custom_Post class needs.
 	 */
 	public function get_booking_custom_post_type_values() {
 

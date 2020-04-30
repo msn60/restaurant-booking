@@ -41,7 +41,7 @@ use Restaurant_Booking\Includes\Database\Table;
 use Restaurant_Booking\Includes\Parts\Shortcodes\{
 	Shortcode1, Content_For_Login_User_Shortcode, Complete_Shortcode
 };
-use Restaurant_Booking\Includes\Parts\Custom_Posts\Custom_Post1;
+use Restaurant_Booking\Includes\Parts\Custom_Posts\Booking_Custom_Post;
 use Restaurant_Booking\Includes\Parts\Custom_Taxonomies\Custom_Taxonomy1;
 use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
 
@@ -164,7 +164,7 @@ final class Restaurant_Booking_Plugin {
 		$activator_object->activate(
 			true,
 			[
-				new Custom_Post1( $this->initial_values->get_booking_custom_post_type_values() )
+				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )
 			],
 			[
 				new Custom_Taxonomy1( $this->initial_values->sample_custom_taxonomy1() )
@@ -244,7 +244,7 @@ final class Restaurant_Booking_Plugin {
 				new Content_For_Login_User_Shortcode( $this->initial_values->sample_content_for_login_user_shortcode() ),
 			],
 			[
-				new Custom_Post1( $this->initial_values->get_booking_custom_post_type_values() )
+				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )
 			],
 			[
 				new Custom_Taxonomy1( $this->initial_values->sample_custom_taxonomy1() )
