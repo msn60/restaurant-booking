@@ -73,7 +73,6 @@ class Activator {
 		$is_need_table_modification = false,
 		array $custom_post_types = null
 	) {
-		//var_dump('gholam3');
 		$this->register_activator_user();
 		if ( ! is_null( $custom_post_types ) ) {
 			$this->custom_post_types = $this->check_array_by_parent_type( $custom_post_types, Custom_Post_Type::class )['valid'];

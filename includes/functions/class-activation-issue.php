@@ -1,8 +1,8 @@
 <?php
 /**
- * Logger Class File
+ * Activation_Issue Class File
  *
- * This class contains functions to log needed parts
+ * This class contains functions to log activation issues when plugin is activated
  *
  * @package    Restaurant_Booking
  * @author     Mehdi Soltani Neshan <soltani.n.mehdi@gmail.com>
@@ -18,9 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Logger Class File
+ * Activation_Issue Class File
  *
- * This class contains functions to log needed parts
+ * This class contains functions to log activation issues when plugin is activated
  *
  * @package    Restaurant_Booking
  * @author     Mehdi Soltani Neshan <soltani.n.mehdi@gmail.com>
@@ -28,21 +28,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 trait Activation_Issue {
 
 	/**
-	 * Write log file in
-	 *
-	 * @access  public
-	 *
-	 * @param string $log_message Message which needs to log in text file
-	 * @param string $file_name   File name of log file
+	 * Register 'activated_plugin' add_action to call related method to log error
 	 */
 	public function register_error_activation_add_action() {
 		add_action( 'activated_plugin', [$this, 'save_plugin_activation_error'] );
 	}
 
+	/**
+	 * Save activation error or warnings or notices in option table
+	 */
 	public function save_plugin_activation_error(  ) {
 		update_option( 'msn_plugin_activation_error',  ob_get_contents() );
 	}
 
+	/**
+	 * Show plugin activation errors or warnings or notices by echoing it
+	 */
 	public function show_plugin_activation_error(  ) {
 		echo get_option( 'msn_plugin_activation_error' );
 	}

@@ -258,7 +258,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 *
 	 */
 	public function register_add_action() {
-		$this->register_error_activation_add_action();
+		//$this->register_error_activation_add_action();
 		if ( ! is_null( $this->plugin_i18n ) ) {
 			$this->plugin_i18n->register_add_action();
 		}

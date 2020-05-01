@@ -13,10 +13,13 @@ This plugin can book table in restaurant with reserving food and also payment fo
 
 ### Specification of this plugin:
 
-> This plugin has special form to book table in restaurant
+> This plugin has a special form to book table in restaurant based on some rules
 
-This plugin can do these tasks in the following: 
-1. It will be complete in future
+These are some of specification about this plugin:
+1. An OOP structure
+2. Its own autoloader
+3. Activation and deactivation log
+4. Activation issues detection
 
 
 
