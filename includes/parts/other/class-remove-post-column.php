@@ -58,9 +58,6 @@ class Remove_Post_Column implements Manage_Post_Columns {
 	 * @return array
 	 */
 	public function manage_columns_list( $columns ) {
-		/*var_dump( $columns );
-		if you want to see list of columns you must use from title
-		unset ($columns['title']);*/
 		unset( $columns['comments'] );
 		unset( $columns['author'] );
 		unset( $columns['tags'] );

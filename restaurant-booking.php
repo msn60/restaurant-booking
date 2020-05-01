@@ -36,13 +36,10 @@ use Restaurant_Booking\Includes\Admin\{
 	Notices\Admin_Notice1, Notices\Woocommerce_Deactive_Notice
 };
 
-use Restaurant_Booking\Includes\Functions\Init_Functions;
-use Restaurant_Booking\Includes\Database\Table;
 use Restaurant_Booking\Includes\Parts\Shortcodes\{
 	Shortcode1, Content_For_Login_User_Shortcode, Complete_Shortcode
 };
 use Restaurant_Booking\Includes\Parts\Custom_Posts\Booking_Custom_Post;
-use Restaurant_Booking\Includes\Parts\Custom_Taxonomies\Custom_Taxonomy1;
 use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
 
 /**
@@ -116,7 +113,7 @@ final class Restaurant_Booking_Plugin {
 			__FILE__,
 			function () {
 				$this->activate(
-					new Activator( intval( get_option( 'last_restaurant_booking_dbs_version' ) ) )
+					new Activator()
 				);
 			}
 		);
@@ -160,16 +157,11 @@ final class Restaurant_Booking_Plugin {
 	 * @see    Restaurant_Booking\Includes\Init\Activator Class
 	 */
 	public function activate( Activator $activator_object ) {
-		global $wpdb;
 		$activator_object->activate(
 			true,
 			[
 				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )
-			],
-			[
-				new Custom_Taxonomy1( $this->initial_values->sample_custom_taxonomy1() )
-			],
-			new Table( $wpdb, Restaurant_Booking_DB_VERSION, get_option( 'has_table_name' ) )
+			]
 		);
 	}
 
@@ -222,7 +214,6 @@ final class Restaurant_Booking_Plugin {
 		$this->initial_values = new Initial_Value();
 		$this->core_object    = new Core(
 			$this->initial_values,
-			new Init_Functions(),
 			new I18n(),
 			new Admin_Hook( Restaurant_Booking_PLUGIN, Restaurant_Booking_VERSION ),
 			new Public_Hook( Restaurant_Booking_PLUGIN, Restaurant_Booking_VERSION ),
@@ -245,9 +236,6 @@ final class Restaurant_Booking_Plugin {
 			],
 			[
 				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )
-			],
-			[
-				new Custom_Taxonomy1( $this->initial_values->sample_custom_taxonomy1() )
 			],
 			[
 				'admin_notice1' => new Admin_Notice1(),

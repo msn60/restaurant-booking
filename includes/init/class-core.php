@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Restaurant_Booking\Includes\Abstracts\{
-	Admin_Menu, Admin_Notice, Admin_Sub_Menu, Ajax, Custom_Taxonomy, Meta_box, Shortcode, Custom_Post_Type
+	Admin_Menu, Admin_Notice, Admin_Sub_Menu, Ajax, Meta_box, Shortcode, Custom_Post_Type
 };
 
 use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
@@ -31,7 +31,7 @@ use Restaurant_Booking\Includes\Admin\{
 };
 use Restaurant_Booking\Includes\Config\Initial_Value;
 use Restaurant_Booking\Includes\Functions\{
-	Init_Functions, Utility, Check_Type, Log_In_Footer
+	 Utility, Check_Type, Log_In_Footer, Activation_Issue
 };
 
 /**
@@ -50,6 +50,7 @@ use Restaurant_Booking\Includes\Functions\{
 class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	use Utility;
 	use Check_Type;
+	use Activation_Issue;
 	/**
 	 * The unique identifier of this plugin.
 	 *
@@ -114,11 +115,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	protected $custom_posts;
 
 	/**
-	 * @var Custom_Taxonomy[] $custom_taxonomies
-	 */
-	protected $custom_taxonomies;
-
-	/**
 	 * @var Admin_Notice[] $admin_notices
 	 */
 	protected $admin_notices;
@@ -128,10 +124,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 */
 	protected $custom_cron_schedule;
 
-	/**
-	 * @var Init_Functions $init_functions Object  to keep all initial function in plugin
-	 */
-	protected $init_functions;
 	/**
 	 * @var I18n $plugin_i18n Object  to add text domain for plugin
 	 */
@@ -163,7 +155,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 */
 	public function __construct(
 		Initial_Value $initial_values,
-		Init_Functions $init_functions = null,
 		I18n $plugin_i18n = null,
 		Admin_Hook $admin_hooks = null,
 		Public_Hook $public_hooks = null,
@@ -173,7 +164,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		array $meta_boxes = null,
 		array $shortcodes = null,
 		array $custom_posts = null,
-		array $custom_taxonomies = null,
 		array $admin_notices = null,
 		Custom_Cron_Schedule $custom_cron_schedule = null,
 		array $ajax_calls = null
@@ -191,10 +181,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		}
 
 		$this->initial_values = $initial_values;
-
-		if ( ! is_null( $init_functions ) ) {
-			$this->init_functions = $init_functions;
-		}
 
 		if ( ! is_null( $plugin_i18n ) ) {
 			$this->plugin_i18n = $plugin_i18n;
@@ -239,9 +225,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		if ( ! is_null( $custom_posts ) ) {
 			$this->custom_posts = $this->check_array_by_parent_type( $custom_posts, Custom_Post_Type::class )['valid'];;
 		}
-		if ( ! is_null( $custom_taxonomies ) ) {
-			$this->custom_taxonomies = $this->check_array_by_parent_type( $custom_taxonomies, Custom_Taxonomy::class )['valid'];;
-		}
 		if ( ! is_null( $admin_notices ) ) {
 			$this->admin_notices = $this->check_array_by_parent_type_assoc( $admin_notices, Admin_Notice::class )['valid'];;
 		}
@@ -262,29 +245,8 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		$this->register_add_filter();
 		$this->set_shortcodes();
 		$this->set_custom_posts();
-		$this->set_custom_taxonomies();
 		$this->show_admin_notice();
-
-		if ( $this->is_need_run_init_test ) {
-			/**
-			 * if you need to log something during execution, you can use from this method
-			 */
-			$this->log_in_footer = new Log_In_Footer();
-			$this->write_log_during_execution(
-				$this->log_in_footer,
-				'Sample to test log class during plugin execution',
-				Restaurant_Booking_LOGS . 'execution-log.txt',
-				'Test sample 1 '
-			);
-
-			$this->write_log_during_execution(
-				$this->log_in_footer,
-				'Sample to test log class during plugin execution',
-				Restaurant_Booking_LOGS . 'execution-log.txt',
-				'Test sample 2 '
-			);
-		}
-
+		//$this->show_plugin_activation_error();
 
 	}
 
@@ -296,9 +258,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 *
 	 */
 	public function register_add_action() {
-		if ( ! is_null( $this->init_functions ) ) {
-			$this->init_functions->register_add_action();
-		}
+		$this->register_error_activation_add_action();
 		if ( ! is_null( $this->plugin_i18n ) ) {
 			$this->plugin_i18n->register_add_action();
 		}
@@ -308,17 +268,11 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			if ( ! is_null( $this->admin_hooks ) ) {
 				$this->admin_hooks->register_add_action();
 			}
-
 			$this->set_meta_boxes();
-			/*add_action( 'load-post.php', array( $this, 'set_meta_boxes' ) );
-			add_action( 'load-post-new.php', array( $this, 'set_meta_boxes' ) );*/
 		} else {
 			if ( ! is_null( $this->public_hooks ) ) {
 				$this->public_hooks->register_add_action();
 			}
-			/*			if (! is_null()) {
-
-						}*/
 			$this->router->register_add_action();
 		}
 	}
@@ -391,19 +345,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		}
 	}
 
-	/**
-	 * Method to set all of needed custom taxonomies for your plugin
-	 *
-	 * @access private
-	 * @since  1.0.1
-	 */
-	private function set_custom_taxonomies() {
-		if ( ! is_null( $this->custom_taxonomies ) ) {
-			foreach ( $this->custom_taxonomies as $custom_taxonomy ) {
-				$custom_taxonomy->register_add_action();
-			}
-		}
-	}
 
 	/**
 	 * Method to show all of needed admin notice in admin panel

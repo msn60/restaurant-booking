@@ -57,12 +57,6 @@ class Admin_Notice1 extends Admin_Notice {
 
 			<?php
 		}
-		/*var_dump( get_current_screen() );
-		var_dump( $_SERVER['HTTP_HOST'] );
-		var_dump( $_SERVER['REQUEST_URI'] );
-		$site_url = get_site_url();
-		$temp_url = str_replace( $site_url, '', $actual_link );
-		var_dump( $actual_link );*/
 
 	}
 

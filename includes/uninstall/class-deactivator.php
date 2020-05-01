@@ -40,32 +40,6 @@ class Deactivator {
 	public function deactivate() {
 
 		$this->register_deactivator_user();
-
-		if ( get_option( 'restaurant_booking_plugin_setting_option2' ) ) {
-			update_option(
-				'restaurant_booking_plugin_setting_option2',
-				'After de-activation'
-			);
-		}
-
-		if ( get_option( 'restaurant_booking_plugin_setting_option3' ) ) {
-			delete_option( 'restaurant_booking_plugin_setting_option3' );
-		}
-
-
-		if ( get_option( 'has_rewrite_for_plugin_name_new_post_types' ) ) {
-			update_option(
-				'has_rewrite_for_plugin_name_new_post_types',
-				false
-			);
-		}
-
-		if ( get_option( 'has_rewrite_for_plugin_name_new_taxonomies' ) ) {
-			update_option(
-				'has_rewrite_for_plugin_name_new_taxonomies',
-				false
-			);
-		}
 	}
 
 	/**
