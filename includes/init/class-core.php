@@ -161,7 +161,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		Router $router = null,
 		array $admin_menus = null,
 		array $admin_sub_menus = null,
-		array $meta_boxes = null,
 		array $shortcodes = null,
 		array $custom_posts = null,
 		array $admin_notices = null,
@@ -210,10 +209,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 
 		if ( ! is_null( $admin_sub_menus ) ) {
 			$this->admin_sub_menus = $this->check_array_by_parent_type( $admin_sub_menus, Admin_Sub_Menu::class )['valid'];
-		}
-
-		if ( ! is_null( $meta_boxes ) ) {
-			$this->meta_boxes = $this->check_array_by_parent_type( $meta_boxes, Meta_box::class )['valid'];;
 		}
 
 		if ( ! is_null( $ajax_calls ) ) {
@@ -268,7 +263,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			if ( ! is_null( $this->admin_hooks ) ) {
 				$this->admin_hooks->register_add_action();
 			}
-			$this->set_meta_boxes();
 		} else {
 			if ( ! is_null( $this->public_hooks ) ) {
 				$this->public_hooks->register_add_action();
@@ -296,18 +290,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			}
 		}
 	}
-
-	/**
-	 * Method to set all of needed meta_boxex
-	 *
-	 * @access public
-	 * @since  1.0.1
-	 */
-	public function set_meta_boxes() {
-		foreach ( $this->meta_boxes as $meta_box ) {
-			$meta_box->register_add_action();
-		}
-	}
+	
 
 	/**
 	 * Register filters that the object needs to be subscribed to.

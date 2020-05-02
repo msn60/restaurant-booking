@@ -32,7 +32,7 @@ use Restaurant_Booking\Includes\Uninstall\{
 	Deactivator, Uninstall
 };
 use Restaurant_Booking\Includes\Admin\{
-	Admin_Menu1, Admin_Sub_Menu1, Admin_Sub_Menu2, Meta_Box3, Meta_Box4,
+	Admin_Menu1, Admin_Sub_Menu1, Admin_Sub_Menu2,
 	Notices\Admin_Notice1, Notices\Woocommerce_Deactive_Notice
 };
 
@@ -93,11 +93,13 @@ final class Restaurant_Booking_Plugin {
 	 */
 	public function __construct() {
 		/*Define Autoloader class for plugin*/
-		$autoloader_path = 'includes/class-autoloader.php';
+		$autoloader_path     = 'includes/class-autoloader.php';
+		$cmb2_functions_file = 'vendor/cmb-functions.php';
 		/**
 		 * Include autoloader class to load all of classes inside this plugin
 		 */
 		require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $autoloader_path;
+		//require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $cmb2_functions_file;
 		/*Define required constant for plugin*/
 		Constant::define_constant();
 
@@ -226,10 +228,6 @@ final class Restaurant_Booking_Plugin {
 				new Admin_Sub_Menu2( $this->initial_values->sample_sub_menu_page2() ),
 			],
 			[
-				new Meta_Box3( $this->initial_values->sample_meta_box3() ),
-				new Meta_Box4( $this->initial_values->sample_meta_box4() ),
-			],
-			[
 				new Shortcode1( $this->initial_values->sample_shortcode1() ),
 				new Complete_Shortcode( $this->initial_values->sample_complete_shortcode() ),
 				new Content_For_Login_User_Shortcode( $this->initial_values->sample_content_for_login_user_shortcode() ),
@@ -238,7 +236,7 @@ final class Restaurant_Booking_Plugin {
 				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )
 			],
 			[
-				'admin_notice1' => new Admin_Notice1(),
+				'admin_notice1'                 => new Admin_Notice1(),
 				'woocommerce_deactivate_notice' => new Woocommerce_Deactive_Notice(),
 			],
 			new Custom_Cron_Schedule( $this->initial_values->sample_custom_cron_schedule() )
@@ -249,3 +247,59 @@ final class Restaurant_Booking_Plugin {
 
 $restaurant_booking_plugin_object = Restaurant_Booking_Plugin::instance();
 $restaurant_booking_plugin_object->run_restaurant_booking_plugin();
+
+add_action( 'cmb2_admin_init', 'cmb2_sample_metaboxes' );
+/**
+ * Define the metabox and field configurations.
+ */
+function cmb2_sample_metaboxes() {
+
+	/**
+	 * Initiate the metabox
+	 */
+	$cmb = new_cmb2_box( array(
+		'id'           => 'test_metabox',
+		'title'        => __( 'Test Metabox', 'cmb2' ),
+		'object_types' => array( 'page', ), // Post type
+		'context'      => 'normal',
+		'priority'     => 'high',
+		'show_names'   => true, // Show field names on the left
+		// 'cmb_styles' => false, // false to disable the CMB stylesheet
+		// 'closed'     => true, // Keep the metabox closed by default
+	) );
+
+	// Regular text field
+	$cmb->add_field( array(
+		'name'       => __( 'Test Text', 'cmb2' ),
+		'desc'       => __( 'field description (optional)', 'cmb2' ),
+		'id'         => 'yourprefix_text',
+		'type'       => 'text',
+		'show_on_cb' => 'cmb2_hide_if_no_cats', // function should return a bool value
+		// 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
+		// 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
+		// 'on_front'        => false, // Optionally designate a field to wp-admin only
+		// 'repeatable'      => true,
+	) );
+
+	// URL text field
+	$cmb->add_field( array(
+		'name' => __( 'Website URL', 'cmb2' ),
+		'desc' => __( 'field description (optional)', 'cmb2' ),
+		'id'   => 'yourprefix_url',
+		'type' => 'text_url',
+		// 'protocols' => array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet'), // Array of allowed protocols
+		// 'repeatable' => true,
+	) );
+
+	// Email text field
+	$cmb->add_field( array(
+		'name' => __( 'Test Text Email', 'cmb2' ),
+		'desc' => __( 'field description (optional)', 'cmb2' ),
+		'id'   => 'yourprefix_email',
+		'type' => 'text_email',
+		// 'repeatable' => true,
+	) );
+
+	// Add other metaboxes as needed
+
+}
