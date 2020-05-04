@@ -39,8 +39,8 @@ class Initial_Value {
 	 */
 	public function sample_menu_page() {
 		$initial_value = [
-			'page_title'        => esc_html__( 'Msn Plugin', Restaurant_Booking_TEXTDOMAIN ),
-			'menu_title'        => esc_html__( 'Msn Plugin', Restaurant_Booking_TEXTDOMAIN ),
+			'page_title'        => esc_html__( 'Msn Plugin', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'menu_title'        => esc_html__( 'Msn Plugin', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'capability'        => 'manage_options',
 			'menu_slug'         => 'restaurant-booking-option-page-url',
 			'callable_function' => 'management_panel_handler',//it can be null
@@ -62,8 +62,8 @@ class Initial_Value {
 	public function sample_sub_menu_page1() {
 		$initial_value = [
 			'parent-slug'       => 'restaurant-booking-option-page-url',
-			'page_title'        => esc_html__( 'Plugin Submenu 1', Restaurant_Booking_TEXTDOMAIN ),
-			'menu_title'        => esc_html__( 'Plugin Submenu 1', Restaurant_Booking_TEXTDOMAIN ),
+			'page_title'        => esc_html__( 'Plugin Submenu 1', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'menu_title'        => esc_html__( 'Plugin Submenu 1', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'capability'        => 'manage_options',
 			'menu_slug'         => 'restaurant-booking-option-page-url',
 			'callable_function' => 'sub_menu1_panel_handler',
@@ -82,8 +82,8 @@ class Initial_Value {
 	public function sample_sub_menu_page2() {
 		$initial_value = [
 			'parent-slug'       => 'restaurant-booking-option-page-url',
-			'page_title'        => esc_html__( 'Plugin Submenu 2', Restaurant_Booking_TEXTDOMAIN ),
-			'menu_title'        => esc_html__( 'Plugin Submenu 2', Restaurant_Booking_TEXTDOMAIN ),
+			'page_title'        => esc_html__( 'Plugin Submenu 2', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'menu_title'        => esc_html__( 'Plugin Submenu 2', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'capability'        => 'manage_options',
 			'menu_slug'         => 'restaurant-booking-option-page-url-2',
 			'callable_function' => 'sub_menu2_panel_handler',
@@ -104,7 +104,7 @@ class Initial_Value {
 		$initial_value = [
 
 			'id'            => 'meta_box_3_id',
-			'title'         => esc_html__( 'Meta box3 Headline', Restaurant_Booking_TEXTDOMAIN ),
+			'title'         => esc_html__( 'Meta box3 Headline', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'callback'      => 'render_content', //It always has this name for all of meta boxes
 			'screens'       => array( 'post', 'page' ),//null - optional
 			'context'       => 'advanced', //optional
@@ -132,7 +132,7 @@ class Initial_Value {
 		$initial_value = [
 
 			'id'            => 'meta_box_4_id',
-			'title'         => esc_html__( 'Meta box4 Headline', Restaurant_Booking_TEXTDOMAIN ),
+			'title'         => esc_html__( 'Meta box4 Headline', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'callback'      => 'render_content',
 			'screens'       => array( 'post', 'page' ),//null - optional
 			'context'       => 'side', //optional
@@ -207,25 +207,25 @@ class Initial_Value {
 	public function get_booking_custom_post_type_values() {
 
 		$labels = array(
-			'name'               => _x( 'Booking', 'post type general name', Restaurant_Booking_TEXTDOMAIN ),
-			'singular_name'      => _x( 'Booking', 'post type singular name', Restaurant_Booking_TEXTDOMAIN ),
-			'menu_name'          => _x( 'Booking', 'admin menu', Restaurant_Booking_TEXTDOMAIN ),
-			'name_admin_bar'     => _x( 'Booking !', 'add new on admin bar', Restaurant_Booking_TEXTDOMAIN ),
-			'add_new'            => _x( 'Add New ', 'Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'add_new_item'       => __( 'Add New Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'new_item'           => __( 'New Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'edit_item'          => __( 'Edit Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'view_item'          => __( 'View Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'all_items'          => __( 'All Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'search_items'       => __( 'Search Booking', Restaurant_Booking_TEXTDOMAIN ),
-			'parent_item_colon'  => __( 'Parent Booking:', Restaurant_Booking_TEXTDOMAIN ),
-			'not_found'          => __( 'No Booking found', Restaurant_Booking_TEXTDOMAIN ),
-			'not_found_in_trash' => __( 'No Booking found in Trash', Restaurant_Booking_TEXTDOMAIN )
+			'name'               => _x( 'Booking', 'post type general name', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'singular_name'      => _x( 'Booking', 'post type singular name', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'menu_name'          => _x( 'Booking', 'admin menu', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'name_admin_bar'     => _x( 'Booking !', 'add new on admin bar', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'add_new'            => _x( 'Add New ', 'Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'add_new_item'       => __( 'Add New Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'new_item'           => __( 'New Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'edit_item'          => __( 'Edit Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'view_item'          => __( 'View Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'all_items'          => __( 'All Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'search_items'       => __( 'Search Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'parent_item_colon'  => __( 'Parent Booking:', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'not_found'          => __( 'No Booking found', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'not_found_in_trash' => __( 'No Booking found in Trash', RESTAURANT_BOOKING_TEXTDOMAIN )
 		);
 
 		$args          = array(
 			'labels'             => $labels,
-			'description'        => __( 'Restaurant Booking', Restaurant_Booking_TEXTDOMAIN ),
+			'description'        => __( 'Restaurant Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
@@ -238,7 +238,7 @@ class Initial_Value {
 			'menu_position'      => 8,
 			'menu_icon'          => 'dashicons-calendar-alt',
 			'show_in_rest'       => true,
-			'supports'           => array( 'title', 'thumbnail', 'excerpt' )
+			'supports'           => array( 'title', 'thumbnail' )
 		);
 		$initial_value = [
 			'post_type' => 'msn-booking',

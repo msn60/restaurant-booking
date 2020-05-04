@@ -48,7 +48,7 @@ class Content_For_Login_User_Shortcode extends Shortcode {
 		if ( is_user_logged_in() ) {
 			return $content;
 		} else {
-			return '<div class="member-only">'.__( 'This section only shows for login users', Restaurant_Booking_TEXTDOMAIN ).'</div>';
+			return '<div class="member-only">'.__( 'This section only shows for login users', RESTAURANT_BOOKING_TEXTDOMAIN ).'</div>';
 		}
 	}
 

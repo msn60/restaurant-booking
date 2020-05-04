@@ -44,7 +44,7 @@ trait Template_Builder {
 	 */
 	public function load_template( $template, $params = array(), $type = 'admin' ) {
 		$template       = str_replace( '.', '/', $template );
-		$base_path      = 'admin' === $type ? Restaurant_Booking_TPL_ADMIN : Restaurant_Booking_TPL_FRONT;
+		$base_path      = 'admin' === $type ? RESTAURANT_BOOKING_TPL_ADMIN : RESTAURANT_BOOKING_TPL_FRONT;
 		$view_file_path = $base_path . $template . '.php';
 		if ( file_exists( $view_file_path ) && is_readable( $view_file_path ) ) {
 			! empty( $params ) ? extract( $params ) : null;

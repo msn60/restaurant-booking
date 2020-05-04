@@ -81,7 +81,7 @@ class Activator {
 			}
 		}
 
-		$this->append_log_in_text_file( 'Sample to test logger class when plugin is activated', Restaurant_Booking_LOGS . 'activator-logs.txt',
+		$this->append_log_in_text_file( 'Sample to test logger class when plugin is activated', RESTAURANT_BOOKING_LOGS . 'activator-logs.txt',
 			'Activator Last Log' );
 
 	}
@@ -95,7 +95,7 @@ class Activator {
 		$this->append_log_in_text_file(
 			'The user with login of: "' . $current_user->user_login . '" and display name of: "' . $current_user->display_name
 			. '" activated this plugin',
-			Restaurant_Booking_LOGS . 'activator-logs.txt',
+			RESTAURANT_BOOKING_LOGS . 'activator-logs.txt',
 			'Activator User' );
 
 	}

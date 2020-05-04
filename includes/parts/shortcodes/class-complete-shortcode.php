@@ -73,7 +73,7 @@ class Complete_Shortcode extends Shortcode {
 
 		// generate a link
 		$output .= '<a href="' . esc_url( $shortcode_attributes['link'] ) . '"' . '>Click here to access '
-		           . esc_html__( $shortcode_attributes['name'], Restaurant_Booking_TEXTDOMAIN ) . '</a>';
+		           . esc_html__( $shortcode_attributes['name'], RESTAURANT_BOOKING_TEXTDOMAIN ) . '</a>';
 
 		// end box
 		$output .= '</div>';

@@ -40,7 +40,7 @@ class I18n implements Action_Hook_Interface {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			Restaurant_Booking_TEXTDOMAIN,
+			RESTAURANT_BOOKING_TEXTDOMAIN,
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

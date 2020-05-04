@@ -87,7 +87,7 @@ class Admin_Hook implements Action_Hook_Interface {
 
 		wp_enqueue_style(
 			$this->plugin_name . '-admin-style',
-			Restaurant_Booking_ADMIN_CSS . 'restaurant-booking-admin-ver-' . Restaurant_Booking_ADMIN_CSS_VERSION . '.css',
+			RESTAURANT_BOOKING_ADMIN_CSS . 'restaurant-booking-admin-ver-' . RESTAURANT_BOOKING_ADMIN_CSS_VERSION . '.css',
 			array(),
 			null,
 			'all'
@@ -116,7 +116,7 @@ class Admin_Hook implements Action_Hook_Interface {
 		 */
 		wp_enqueue_script(
 			$this->plugin_name . '-admin-script',
-			Restaurant_Booking_ADMIN_JS . 'restaurant-booking-admin-ver-' . Restaurant_Booking_ADMIN_JS_VERSION . '.js',
+			RESTAURANT_BOOKING_ADMIN_JS . 'restaurant-booking-admin-ver-' . RESTAURANT_BOOKING_ADMIN_JS_VERSION . '.js',
 			array( 'jquery' ),
 			null,
 			true

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Restaurant_Booking\Includes\Abstracts\{
-	Admin_Menu, Admin_Notice, Admin_Sub_Menu, Ajax, Meta_box, Shortcode, Custom_Post_Type
+	Admin_Menu, Admin_Notice, Admin_Sub_Menu, Ajax, CMB2_Fields, Meta_box, Shortcode, Custom_Post_Type
 };
 
 use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
@@ -27,11 +27,12 @@ use Restaurant_Booking\Includes\Interfaces\{
 	Action_Hook_Interface, Filter_Hook_Interface
 };
 use Restaurant_Booking\Includes\Admin\{
-	Admin_Menu1, Admin_Sub_Menu1, Admin_Sub_Menu2
+	Admin_Menu1, Admin_Sub_Menu1, Admin_Sub_Menu2, Booking_Fields
 };
 use Restaurant_Booking\Includes\Config\Initial_Value;
+use Restaurant_Booking\Includes\Config\CMB2_Initial_Value;
 use Restaurant_Booking\Includes\Functions\{
-	 Utility, Check_Type, Log_In_Footer, Activation_Issue
+	Utility, Check_Type, Log_In_Footer, Activation_Issue
 };
 
 /**
@@ -115,6 +116,11 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	protected $custom_posts;
 
 	/**
+	 * @var CMB2_Fields[] $cmb2_boxes
+	 */
+	protected $cmb2_boxes;
+
+	/**
 	 * @var Admin_Notice[] $admin_notices
 	 */
 	protected $admin_notices;
@@ -163,18 +169,19 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		array $admin_sub_menus = null,
 		array $shortcodes = null,
 		array $custom_posts = null,
+		array $cmb2_boxes = null,
 		array $admin_notices = null,
 		Custom_Cron_Schedule $custom_cron_schedule = null,
 		array $ajax_calls = null
 
 	) {
-		if ( defined( 'Restaurant_Booking_VERSION' ) ) {
-			$this->plugin_version = Restaurant_Booking_VERSION;
+		if ( defined( 'RESTAURANT_BOOKING_VERSION' ) ) {
+			$this->plugin_version = RESTAURANT_BOOKING_VERSION;
 		} else {
 			$this->plugin_version = '1.0.1';
 		}
-		if ( defined( 'Restaurant_Booking_PLUGIN' ) ) {
-			$this->plugin_name = Restaurant_Booking_PLUGIN;
+		if ( defined( 'RESTAURANT_BOOKING_PLUGIN' ) ) {
+			$this->plugin_name = RESTAURANT_BOOKING_PLUGIN;
 		} else {
 			$this->plugin_name = 'restaurant-booking';
 		}
@@ -220,6 +227,10 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		if ( ! is_null( $custom_posts ) ) {
 			$this->custom_posts = $this->check_array_by_parent_type( $custom_posts, Custom_Post_Type::class )['valid'];;
 		}
+
+		if ( ! is_null( $cmb2_boxes) ) {
+			$this->cmb2_boxes = $this->check_array_by_parent_type( $cmb2_boxes, CMB2_Fields::class )['valid'];;
+		}
 		if ( ! is_null( $admin_notices ) ) {
 			$this->admin_notices = $this->check_array_by_parent_type_assoc( $admin_notices, Admin_Notice::class )['valid'];;
 		}
@@ -239,7 +250,9 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		$this->register_add_action();
 		$this->register_add_filter();
 		$this->set_shortcodes();
+
 		$this->set_custom_posts();
+		$this->set_cmb2_boxes();
 		$this->show_admin_notice();
 		//$this->show_plugin_activation_error();
 
@@ -290,7 +303,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			}
 		}
 	}
-	
+
 
 	/**
 	 * Register filters that the object needs to be subscribed to.
@@ -324,6 +337,14 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		if ( ! is_null( $this->custom_posts ) ) {
 			foreach ( $this->custom_posts as $custom_post ) {
 				$custom_post->register_add_action();
+			}
+		}
+	}
+
+	private function set_cmb2_boxes() {
+		if ( ! is_null( $this->cmb2_boxes ) ) {
+			foreach ( $this->cmb2_boxes as $cmb_2_box) {
+				$cmb_2_box->register_add_action();
 			}
 		}
 	}

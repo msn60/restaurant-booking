@@ -46,7 +46,7 @@ class Woocommerce_Deactive_Notice extends Admin_Notice {
             <p>
 				<?php _e(
 					'Unfortunately Woocommerce is not activate. So you can not use feature of this plugin ',
-                    Restaurant_Booking_TEXTDOMAIN
+                    RESTAURANT_BOOKING_TEXTDOMAIN
 				) ?>
             </p>
         </div>

@@ -27,12 +27,13 @@ use Restaurant_Booking\Includes\Init\{
 	Admin_Hook, Core, Constant, Activator, I18n, Public_Hook, Router
 };
 use Restaurant_Booking\Includes\Config\Initial_Value;
+use Restaurant_Booking\Includes\Config\CMB2_Initial_Value;
 use Restaurant_Booking\Includes\Parts\Other\Remove_Post_Column;
 use Restaurant_Booking\Includes\Uninstall\{
 	Deactivator, Uninstall
 };
 use Restaurant_Booking\Includes\Admin\{
-	Admin_Menu1, Admin_Sub_Menu1, Admin_Sub_Menu2,
+	Admin_Menu1, Admin_Sub_Menu1, Admin_Sub_Menu2, Booking_Fields,
 	Notices\Admin_Notice1, Notices\Woocommerce_Deactive_Notice
 };
 
@@ -80,6 +81,10 @@ final class Restaurant_Booking_Plugin {
 	 */
 	protected $initial_values;
 	/**
+	 * @var CMB2_Initial_Value $cmb2_initial_values
+	 */
+	protected $cmb2_initial_values;
+	/**
 	 * @var Core $core_object An object to keep core class for plugin.
 	 */
 	private $core_object;
@@ -99,7 +104,7 @@ final class Restaurant_Booking_Plugin {
 		 * Include autoloader class to load all of classes inside this plugin
 		 */
 		require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $autoloader_path;
-		//require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $cmb2_functions_file;
+		require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $cmb2_functions_file;
 		/*Define required constant for plugin*/
 		Constant::define_constant();
 
@@ -213,12 +218,13 @@ final class Restaurant_Booking_Plugin {
 	 * @since  1.0.1
 	 */
 	public function run_restaurant_booking_plugin() {
-		$this->initial_values = new Initial_Value();
-		$this->core_object    = new Core(
+		$this->initial_values      = new Initial_Value();
+		$this->cmb2_initial_values = new CMB2_Initial_Value();
+		$this->core_object         = new Core(
 			$this->initial_values,
 			new I18n(),
-			new Admin_Hook( Restaurant_Booking_PLUGIN, Restaurant_Booking_VERSION ),
-			new Public_Hook( Restaurant_Booking_PLUGIN, Restaurant_Booking_VERSION ),
+			new Admin_Hook( RESTAURANT_BOOKING_PLUGIN, RESTAURANT_BOOKING_VERSION ),
+			new Public_Hook( RESTAURANT_BOOKING_PLUGIN, RESTAURANT_BOOKING_VERSION ),
 			new Router(),
 			[
 				new Admin_Menu1( $this->initial_values->sample_menu_page() )
@@ -236,6 +242,9 @@ final class Restaurant_Booking_Plugin {
 				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )
 			],
 			[
+				new Booking_Fields( $this->cmb2_initial_values->get_cmb2_main_box(), $this->cmb2_initial_values->get_cmb2_fields() )
+			],
+			[
 				'admin_notice1'                 => new Admin_Notice1(),
 				'woocommerce_deactivate_notice' => new Woocommerce_Deactive_Notice(),
 			],
@@ -247,59 +256,3 @@ final class Restaurant_Booking_Plugin {
 
 $restaurant_booking_plugin_object = Restaurant_Booking_Plugin::instance();
 $restaurant_booking_plugin_object->run_restaurant_booking_plugin();
-
-add_action( 'cmb2_admin_init', 'cmb2_sample_metaboxes' );
-/**
- * Define the metabox and field configurations.
- */
-function cmb2_sample_metaboxes() {
-
-	/**
-	 * Initiate the metabox
-	 */
-	$cmb = new_cmb2_box( array(
-		'id'           => 'test_metabox',
-		'title'        => __( 'Test Metabox', 'cmb2' ),
-		'object_types' => array( 'page', ), // Post type
-		'context'      => 'normal',
-		'priority'     => 'high',
-		'show_names'   => true, // Show field names on the left
-		// 'cmb_styles' => false, // false to disable the CMB stylesheet
-		// 'closed'     => true, // Keep the metabox closed by default
-	) );
-
-	// Regular text field
-	$cmb->add_field( array(
-		'name'       => __( 'Test Text', 'cmb2' ),
-		'desc'       => __( 'field description (optional)', 'cmb2' ),
-		'id'         => 'yourprefix_text',
-		'type'       => 'text',
-		'show_on_cb' => 'cmb2_hide_if_no_cats', // function should return a bool value
-		// 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-		// 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-		// 'on_front'        => false, // Optionally designate a field to wp-admin only
-		// 'repeatable'      => true,
-	) );
-
-	// URL text field
-	$cmb->add_field( array(
-		'name' => __( 'Website URL', 'cmb2' ),
-		'desc' => __( 'field description (optional)', 'cmb2' ),
-		'id'   => 'yourprefix_url',
-		'type' => 'text_url',
-		// 'protocols' => array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet'), // Array of allowed protocols
-		// 'repeatable' => true,
-	) );
-
-	// Email text field
-	$cmb->add_field( array(
-		'name' => __( 'Test Text Email', 'cmb2' ),
-		'desc' => __( 'field description (optional)', 'cmb2' ),
-		'id'   => 'yourprefix_email',
-		'type' => 'text_email',
-		// 'repeatable' => true,
-	) );
-
-	// Add other metaboxes as needed
-
-}

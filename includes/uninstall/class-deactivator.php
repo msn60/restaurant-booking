@@ -51,7 +51,7 @@ class Deactivator {
 		$this->append_log_in_text_file(
 			'The user with login of: "' . $current_user->user_login . '" and display name of: "' . $current_user->display_name
 			. '" de-activated this plugin',
-			Restaurant_Booking_LOGS . 'deactivator-logs.txt',
+			RESTAURANT_BOOKING_LOGS . 'deactivator-logs.txt',
 			'De-Activator User' );
 
 	}

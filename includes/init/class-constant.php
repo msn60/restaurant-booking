@@ -37,190 +37,208 @@ class Constant {
 	 */
 	public static function define_constant() {
 
+		/*
+		 * Restaurant_Booking_PATH
+		 * Restaurant_Booking_URL
+		 * Restaurant_Booking_CSS
+		 * Restaurant_Booking_JS
+		 * Restaurant_Booking_IMG
+		 * Restaurant_Booking_ADMIN_CSS
+		 * Restaurant_Booking_ADMIN_JS
+		 * RESTAURANT_BOOKING_ADMIN_IMG
+		 * Restaurant_Booking_TPL
+		 * RESTAURANT_BOOKING_INC
+		 * RESTAURANT_BOOKING_LANG
+		 * Restaurant_Booking_LOGS
+		 * Restaurant_Booking_VERSION
+		 * Restaurant_Booking_PLUGIN
+		 * Restaurant_Booking_TEXTDOMAIN
+		 * */
+
 		/**
-		 * Restaurant_Booking_PATH constant.
+		 * RESTAURANT_BOOKING_PATH constant.
 		 * It is used to specify plugin path
 		 */
-		if ( ! defined( 'Restaurant_Booking_PATH' ) ) {
-			define( 'Restaurant_Booking_PATH', trailingslashit( plugin_dir_path( dirname( dirname( __FILE__ ) ) ) ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_PATH' ) ) {
+			define( 'RESTAURANT_BOOKING_PATH', trailingslashit( plugin_dir_path( dirname( dirname( __FILE__ ) ) ) ) );
 		}
 
 		/**
-		 * Restaurant_Booking_URL constant.
+		 * RESTAURANT_BOOKING_URL constant.
 		 * It is used to specify plugin urls
 		 */
-		if ( ! defined( 'Restaurant_Booking_URL' ) ) {
-			define( 'Restaurant_Booking_URL', trailingslashit( plugin_dir_url( dirname( dirname( __FILE__ ) ) ) ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_URL' ) ) {
+			define( 'RESTAURANT_BOOKING_URL', trailingslashit( plugin_dir_url( dirname( dirname( __FILE__ ) ) ) ) );
 		}
 
 		/**
-		 * Restaurant_Booking_CSS constant.
+		 * RESTAURANT_BOOKING_CSS constant.
 		 * It is used to specify css urls inside assets directory. It's used in front end and
 		 * using to  load related CSS files for front end user.
 		 */
-		if ( ! defined( 'Restaurant_Booking_CSS' ) ) {
-			define( 'Restaurant_Booking_CSS', trailingslashit( Restaurant_Booking_URL ) . 'assets/css/' );
+		if ( ! defined( 'RESTAURANT_BOOKING_CSS' ) ) {
+			define( 'RESTAURANT_BOOKING_CSS', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/css/' );
 		}
 
 		/**
-		 * Restaurant_Booking_JS constant.
+		 * RESTAURANT_BOOKING_JS constant.
 		 * It is used to specify JavaScript urls inside assets directory. It's used in front end and
 		 * using to load related JS files for front end user.
 		 */
-		if ( ! defined( 'Restaurant_Booking_JS' ) ) {
-			define( 'Restaurant_Booking_JS', trailingslashit( Restaurant_Booking_URL ) . 'assets/js/' );
+		if ( ! defined( 'RESTAURANT_BOOKING_JS' ) ) {
+			define( 'RESTAURANT_BOOKING_JS', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/js/' );
 		}
 
 		/**
-		 * Restaurant_Booking_IMG constant.
+		 * RESTAURANT_BOOKING_IMG constant.
 		 * It is used to specify image urls inside assets directory. It's used in front end and
 		 * using to load related image files for front end user.
 		 */
-		if ( ! defined( 'Restaurant_Booking_IMG' ) ) {
-			define( 'Restaurant_Booking_IMG', trailingslashit( Restaurant_Booking_URL ) . 'assets/images/' );
+		if ( ! defined( 'RESTAURANT_BOOKING_IMG' ) ) {
+			define( 'RESTAURANT_BOOKING_IMG', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/images/' );
 		}
 
 		/**
-		 * Restaurant_Booking_ADMIN_CSS constant.
+		 * RESTAURANT_BOOKING_ADMIN_CSS constant.
 		 * It is used to specify css urls inside assets/admin directory. It's used in WordPress
 		 *  admin panel and using to  load related CSS files for admin user.
 		 */
-		if ( ! defined( 'Restaurant_Booking_ADMIN_CSS' ) ) {
-			define( 'Restaurant_Booking_ADMIN_CSS', trailingslashit( Restaurant_Booking_URL ) . 'assets/admin/css/' );
+		if ( ! defined( 'RESTAURANT_BOOKING_ADMIN_CSS' ) ) {
+			define( 'RESTAURANT_BOOKING_ADMIN_CSS', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/admin/css/' );
 		}
 
 		/**
-		 * Restaurant_Booking_ADMIN_JS constant.
+		 * RESTAURANT_BOOKING_ADMIN_JS constant.
 		 * It is used to specify JS urls inside assets/admin directory. It's used in WordPress
 		 *  admin panel and using to  load related JS files for admin user.
 		 */
-		if ( ! defined( 'Restaurant_Booking_ADMIN_JS' ) ) {
-			define( 'Restaurant_Booking_ADMIN_JS', trailingslashit( Restaurant_Booking_URL ) . 'assets/admin/js/' );
+		if ( ! defined( 'RESTAURANT_BOOKING_ADMIN_JS' ) ) {
+			define( 'RESTAURANT_BOOKING_ADMIN_JS', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/admin/js/' );
 		}
 
 		/**
-		 * Restaurant_Booking_ADMIN_IMG constant.
+		 * RESTAURANT_BOOKING_ADMIN_IMG constant.
 		 * It is used to specify image urls inside assets/admin directory. It's used in WordPress
 		 *  admin panel and using to  load related JS files for admin user.
 		 */
-		if ( ! defined( 'Restaurant_Booking_ADMIN_IMG' ) ) {
-			define( 'Restaurant_Booking_ADMIN_IMG', trailingslashit( Restaurant_Booking_URL ) . 'assets/admin/images/' );
+		if ( ! defined( 'RESTAURANT_BOOKING_ADMIN_IMG' ) ) {
+			define( 'RESTAURANT_BOOKING_ADMIN_IMG', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/admin/images/' );
 		}
 
 		/**
-		 * Restaurant_Booking_TPL constant.
+		 * RESTAURANT_BOOKING_TPL constant.
 		 * It is used to specify template urls inside templates directory.
 		 */
-		if ( ! defined( 'Restaurant_Booking_TPL' ) ) {
-			define( 'Restaurant_Booking_TPL', trailingslashit( Restaurant_Booking_PATH . 'templates' ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_TPL' ) ) {
+			define( 'RESTAURANT_BOOKING_TPL', trailingslashit( RESTAURANT_BOOKING_PATH . 'templates' ) );
 		}
 
 		/**
-		 * Restaurant_Booking_INC constant.
+		 * RESTAURANT_BOOKING_INC constant.
 		 * It is used to specify include path inside includes directory.
 		 */
-		if ( ! defined( 'Restaurant_Booking_INC' ) ) {
-			define( 'Restaurant_Booking_INC', trailingslashit( Restaurant_Booking_PATH . 'includes' ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_INC' ) ) {
+			define( 'RESTAURANT_BOOKING_INC', trailingslashit( RESTAURANT_BOOKING_PATH . 'includes' ) );
 		}
 
 		/**
-		 * Restaurant_Booking_LANG constant.
+		 * RESTAURANT_BOOKING_LANG constant.
 		 * It is used to specify language path inside languages directory.
 		 */
-		if ( ! defined( 'Restaurant_Booking_LANG' ) ) {
-			define( 'Restaurant_Booking_LANG', trailingslashit( Restaurant_Booking_PATH . 'languages' ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_LANG' ) ) {
+			define( 'RESTAURANT_BOOKING_LANG', trailingslashit( RESTAURANT_BOOKING_PATH . 'languages' ) );
 		}
 
 		/**
-		 * Restaurant_Booking_TPL_ADMIN constant.
+		 * RESTAURANT_BOOKING_TPL_ADMIN constant.
 		 * It is used to specify template urls inside templates/admin directory. If you want to
 		 * create a template for admin panel or administration purpose, you will use from it.
 		 */
-		if ( ! defined( 'Restaurant_Booking_TPL_ADMIN' ) ) {
-			define( 'Restaurant_Booking_TPL_ADMIN', trailingslashit( Restaurant_Booking_TPL . 'admin' ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_TPL_ADMIN' ) ) {
+			define( 'RESTAURANT_BOOKING_TPL_ADMIN', trailingslashit( RESTAURANT_BOOKING_TPL . 'admin' ) );
 		}
 
 		/**
-		 * Restaurant_Booking_TPL_FRONT constant.
+		 * RESTAURANT_BOOKING_TPL_FRONT constant.
 		 * It is used to specify template urls inside templates/front directory. If you want to
 		 * create a template for front end or end user purposes, you will use from it.
 		 */
-		if ( ! defined( 'Restaurant_Booking_TPL_FRONT' ) ) {
-			define( 'Restaurant_Booking_TPL_FRONT', trailingslashit( Restaurant_Booking_TPL . 'front' ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_TPL_FRONT' ) ) {
+			define( 'RESTAURANT_BOOKING_TPL_FRONT', trailingslashit( RESTAURANT_BOOKING_TPL . 'front' ) );
 		}
 
 		/**
-		 * Restaurant_Booking_TPL constant.
+		 * RESTAURANT_BOOKING_TPL constant.
 		 * It is used to specify template urls inside templates directory.
 		 */
-		if ( ! defined( 'Restaurant_Booking_LOGS' ) ) {
-			define( 'Restaurant_Booking_LOGS', trailingslashit( Restaurant_Booking_PATH . 'logs' ) );
+		if ( ! defined( 'RESTAURANT_BOOKING_LOGS' ) ) {
+			define( 'RESTAURANT_BOOKING_LOGS', trailingslashit( RESTAURANT_BOOKING_PATH . 'logs' ) );
 		}
 
 		/**
-		 * Restaurant_Booking_CSS_VERSION constant.
+		 * RESTAURANT_BOOKING_CSS_VERSION constant.
 		 * You can use from this constant to apply on main CSS file when you have changed it.
 		 */
-		if ( ! defined( 'Restaurant_Booking_CSS_VERSION' ) ) {
-			define( 'Restaurant_Booking_CSS_VERSION', 1 );
+		if ( ! defined( 'RESTAURANT_BOOKING_CSS_VERSION' ) ) {
+			define( 'RESTAURANT_BOOKING_CSS_VERSION', 1 );
 		}
 		/**
-		 * Restaurant_Booking_JS_VERSION constant.
+		 * RESTAURANT_BOOKING_JS_VERSION constant.
 		 * You can use from this constant to apply on main JS file when you have changed it.
 		 */
-		if ( ! defined( 'Restaurant_Booking_JS_VERSION' ) ) {
-			define( 'Restaurant_Booking_JS_VERSION', 1 );
+		if ( ! defined( 'RESTAURANT_BOOKING_JS_VERSION' ) ) {
+			define( 'RESTAURANT_BOOKING_JS_VERSION', 1 );
 		}
 
 		/**
-		 * Restaurant_Booking_CSS_VERSION constant.
+		 * RESTAURANT_BOOKING_CSS_VERSION constant.
 		 * You can use from this constant to apply on main CSS file when you have changed it.
 		 */
-		if ( ! defined( 'Restaurant_Booking_ADMIN_CSS_VERSION' ) ) {
-			define( 'Restaurant_Booking_ADMIN_CSS_VERSION', 1 );
+		if ( ! defined( 'RESTAURANT_BOOKING_ADMIN_CSS_VERSION' ) ) {
+			define( 'RESTAURANT_BOOKING_ADMIN_CSS_VERSION', 1 );
 		}
 		/**
-		 * Restaurant_Booking_JS_VERSION constant.
+		 * RESTAURANT_BOOKING_JS_VERSION constant.
 		 * You can use from this constant to apply on main JS file when you have changed it.
 		 */
-		if ( ! defined( 'Restaurant_Booking_ADMIN_JS_VERSION' ) ) {
-			define( 'Restaurant_Booking_ADMIN_JS_VERSION', 1 );
+		if ( ! defined( 'RESTAURANT_BOOKING_ADMIN_JS_VERSION' ) ) {
+			define( 'RESTAURANT_BOOKING_ADMIN_JS_VERSION', 1 );
 		}
 
 		/**
-		 * Restaurant_Booking_VERSION constant.
+		 * RESTAURANT_BOOKING_VERSION constant.
 		 * It defines version of plugin for management tasks in your plugin
 		 */
-		if ( ! defined( 'Restaurant_Booking_VERSION') ) {
-			define( 'Restaurant_Booking_VERSION', '1.0.1' );
+		if ( ! defined( 'RESTAURANT_BOOKING_VERSION') ) {
+			define( 'RESTAURANT_BOOKING_VERSION', '1.0.1' );
 		}
 
 		/**
-		 * Restaurant_Booking_PLUGIN constant.
+		 * RESTAURANT_BOOKING_PLUGIN constant.
 		 * It defines name of plugin for management tasks in your plugin
 		 */
-		if ( ! defined( 'Restaurant_Booking_PLUGIN') ) {
-			define( 'Restaurant_Booking_PLUGIN', 'restaurant-booking' );
+		if ( ! defined( 'RESTAURANT_BOOKING_PLUGIN') ) {
+			define( 'RESTAURANT_BOOKING_PLUGIN', 'restaurant-booking' );
 		}
 
 		/**
-		 * Restaurant_Booking_DB_VERSION constant
+		 * RESTAURANT_BOOKING_DB_VERSION constant
 		 *
 		 * It defines database version
 		 * You can use from this constant to apply your changes in updates or
 		 * activate plugin again
 		 */
-		if ( ! defined( 'Restaurant_Booking_DB_VERSION') ) {
-			define( 'Restaurant_Booking_DB_VERSION', 1 );
+		if ( ! defined( 'RESTAURANT_BOOKING_DB_VERSION') ) {
+			define( 'RESTAURANT_BOOKING_DB_VERSION', 1 );
 		}
 
 		/**
-		 * Restaurant_Booking_TEXTDOMAIN constant
+		 * RESTAURANT_BOOKING_TEXTDOMAIN constant
 		 *
 		 * It defines text domain name for plugin
 		 */
-		if ( ! defined( 'Restaurant_Booking_TEXTDOMAIN') ) {
-			define( 'Restaurant_Booking_TEXTDOMAIN', 'restaurant-booking-textdomain' );
+		if ( ! defined( 'RESTAURANT_BOOKING_TEXTDOMAIN') ) {
+			define( 'RESTAURANT_BOOKING_TEXTDOMAIN', 'restaurant-booking-textdomain' );
 		}
 		/*In future maybe I want to add constants for separated upload directory inside plugin directory*/
 	}

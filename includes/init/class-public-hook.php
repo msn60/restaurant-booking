@@ -87,7 +87,7 @@ class Public_Hook implements Action_Hook_Interface {
 
 		wp_enqueue_style(
 			$this->plugin_name . '-public-style',
-			Restaurant_Booking_CSS . 'restaurant-booking-public-ver-' . Restaurant_Booking_CSS_VERSION . '.css',
+			RESTAURANT_BOOKING_CSS . 'restaurant-booking-public-ver-' . RESTAURANT_BOOKING_CSS_VERSION . '.css',
 			array(),
 			null,
 			'all'
@@ -116,7 +116,7 @@ class Public_Hook implements Action_Hook_Interface {
 
 		wp_enqueue_script(
 			$this->plugin_name . '-public-script',
-			Restaurant_Booking_JS . 'restaurant-booking-public-ver-' . Restaurant_Booking_JS_VERSION . '.js',
+			RESTAURANT_BOOKING_JS . 'restaurant-booking-public-ver-' . RESTAURANT_BOOKING_JS_VERSION . '.js',
 			array( 'jquery' ),
 			null,
 			true
