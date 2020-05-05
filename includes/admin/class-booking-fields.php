@@ -63,6 +63,14 @@ class Booking_Fields extends CMB2_Fields {
 
 		$this->cmb2_object->add_field( $this->cmb2_fields['guest_count'] );
 
+		$this->cmb2_object->add_field( $this->cmb2_fields['phone_number'] );
+
+		$this->cmb2_object->add_field( $this->cmb2_fields['email'] );
+
+		$this->cmb2_object->add_field( $this->cmb2_fields['date'] );
+
+		$this->cmb2_object->add_field( $this->cmb2_fields['time'] );
+
 
 	}
 

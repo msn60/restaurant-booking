@@ -98,6 +98,35 @@ class CMB2_Initial_Value {
 				'id'   => 'msn_booking_guest_count',
 				'type' => 'text_number',
 			],
+			'phone_number'     => [
+				'name'   => esc_html__( 'Phone', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'desc'   => esc_html__( 'Reservation phone number', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'id'     => 'msn_booking_phone_number',
+				'type'   => 'text_medium',
+				'column' => true,
+			],
+			'email'            => [
+				'name' => esc_html__( 'Email', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'desc' => esc_html__( 'Reservation email address', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'id'   => 'msn_booking_email_address',
+				'type' => 'text_email',
+			],
+			'date'             => [
+				'name' => esc_html__( 'Reservation Date', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				//'desc' => esc_html__( 'field description (optional)', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'id'   => 'msn_booking_date',
+				'type' => 'text_date',
+				'date_format' => 'Y-m-d',
+				'column'      => true,
+			],
+			'time'             => [
+				'name'        => esc_html__( 'Reservation Time', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				//'desc'        => esc_html__( 'field description (optional)', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'id'          => 'msn_booking_time',
+				'type'        => 'text_time',
+				'time_format' => 'H:i', // Set to 24hr format
+				'column'      => true,
+			],
 		];
 
 		return $initial_value;
