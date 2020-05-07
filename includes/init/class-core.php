@@ -19,10 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Restaurant_Booking\Includes\Abstracts\{
-	Admin_Menu, Admin_Notice, Admin_Sub_Menu, Ajax, CMB2_Fields, Meta_box, Shortcode, Custom_Post_Type
+	Admin_Menu, Admin_Notice, Admin_Sub_Menu, Ajax, CMB2_Fields, Shortcode, Custom_Post_Type
 };
 
-use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
 use Restaurant_Booking\Includes\Interfaces\{
 	Action_Hook_Interface, Filter_Hook_Interface
 };
@@ -106,11 +105,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	protected $initial_values;
 
 	/**
-	 * @var Meta_box[] $meta_boxes
-	 */
-	protected $meta_boxes;
-
-	/**
 	 * @var Custom_Post_Type[] $custom_posts
 	 */
 	protected $custom_posts;
@@ -124,11 +118,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 * @var Admin_Notice[] $admin_notices
 	 */
 	protected $admin_notices;
-
-	/**
-	 * @var Custom_Cron_Schedule $custom_cron_schedule
-	 */
-	protected $custom_cron_schedule;
 
 	/**
 	 * @var I18n $plugin_i18n Object  to add text domain for plugin
@@ -171,7 +160,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		array $custom_posts = null,
 		array $cmb2_boxes = null,
 		array $admin_notices = null,
-		Custom_Cron_Schedule $custom_cron_schedule = null,
 		array $ajax_calls = null
 
 	) {
@@ -204,9 +192,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			$this->router = $router;
 		}
 
-		if ( ! is_null( $custom_cron_schedule ) ) {
-			$this->custom_cron_schedule = $custom_cron_schedule;
-		}
 		/*
 		 * Checking for valid types
 		 * */
@@ -248,7 +233,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 */
 	public function init_core() {
 		$this->register_add_action();
-		$this->register_add_filter();
+		//$this->register_add_filter();
 		$this->set_shortcodes();
 
 		$this->set_custom_posts();
@@ -310,7 +295,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 *
 	 */
 	public function register_add_filter() {
-		$this->custom_cron_schedule->register_add_filter();
+		//TODO: for future
 	}
 
 	/**

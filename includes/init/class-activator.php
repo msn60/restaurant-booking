@@ -23,8 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Restaurant_Booking\Includes\Abstracts\{
 	Custom_Post_Type, Custom_Taxonomy
 };
-use Restaurant_Booking\Includes\Database\Table;
-use Restaurant_Booking\Includes\Config\Info;
 use Restaurant_Booking\Includes\Functions\{
 	Check_Type, Current_User, Logger
 };
@@ -37,8 +35,6 @@ use Restaurant_Booking\Includes\Functions\{
  *
  * @package    Restaurant_Booking
  * @author     Mehdi Soltani Neshan <soltani.n.mehdi@gmail.com>
- * @see        \Restaurant_Booking\Includes\Config\Info
- * @see        \Restaurant_Booking\Includes\Database\Table
  */
 class Activator {
 	use Logger;

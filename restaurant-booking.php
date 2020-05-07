@@ -28,7 +28,6 @@ use Restaurant_Booking\Includes\Init\{
 };
 use Restaurant_Booking\Includes\Config\Initial_Value;
 use Restaurant_Booking\Includes\Config\CMB2_Initial_Value;
-use Restaurant_Booking\Includes\Parts\Other\Remove_Post_Column;
 use Restaurant_Booking\Includes\Uninstall\{
 	Deactivator, Uninstall
 };
@@ -39,7 +38,6 @@ use Restaurant_Booking\Includes\Admin\{
 
 use Restaurant_Booking\Includes\Parts\Shortcodes\Booking_Shortcode;
 use Restaurant_Booking\Includes\Parts\Custom_Posts\Booking_Custom_Post;
-use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
 
 /**
  * If this file is called directly, then abort execution.
@@ -242,8 +240,7 @@ final class Restaurant_Booking_Plugin {
 			[
 				'admin_notice1'                 => new Admin_Notice1(),
 				'woocommerce_deactivate_notice' => new Woocommerce_Deactive_Notice(),
-			],
-			new Custom_Cron_Schedule( $this->initial_values->sample_custom_cron_schedule() )
+			]
 		);
 		$this->core_object->init_core();
 	}
