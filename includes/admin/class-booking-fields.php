@@ -70,8 +70,6 @@ class Booking_Fields extends CMB2_Fields {
 		$this->cmb2_object->add_field( $this->cmb2_fields['date'] );
 
 		$this->cmb2_object->add_field( $this->cmb2_fields['time'] );
-
-
 	}
 
 }

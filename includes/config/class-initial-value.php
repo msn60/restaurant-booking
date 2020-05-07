@@ -93,62 +93,6 @@ class Initial_Value {
 	}
 
 	/**
-	 * Initial values to create meta box 1.
-	 *
-	 * @access public
-	 * @see    https://developer.wordpress.org/reference/functions/get_post_meta/
-	 * @see    https://developer.wordpress.org/reference/functions/add_meta_box/
-	 * @return array It returns all of arguments that add_meta_box function needs.
-	 */
-	public function sample_meta_box3() {
-		$initial_value = [
-
-			'id'            => 'meta_box_3_id',
-			'title'         => esc_html__( 'Meta box3 Headline', RESTAURANT_BOOKING_TEXTDOMAIN ),
-			'callback'      => 'render_content', //It always has this name for all of meta boxes
-			'screens'       => array( 'post', 'page' ),//null - optional
-			'context'       => 'advanced', //optional
-			'priority'      => 'high', //optional
-			'callback_args' => null, //optional
-			'meta_key'      => '_restaurant_booking_meta_box_key_3',
-			'single'        => true, //the result of get_post_meta Will be an array if $single is false
-			'action'        => 'restaurant_booking_meta_box3',
-			'nonce_name'    => 'restaurant_booking_meta_box3_nonce'
-
-		];
-
-		return $initial_value;
-	}
-
-	/**
-	 * Initial values to create meta box 1.
-	 *
-	 * @access public
-	 * @see    https://developer.wordpress.org/reference/functions/get_post_meta/
-	 * @see    https://developer.wordpress.org/reference/functions/add_meta_box/
-	 * @return array It returns all of arguments that add_meta_box function needs.
-	 */
-	public function sample_meta_box4() {
-		$initial_value = [
-
-			'id'            => 'meta_box_4_id',
-			'title'         => esc_html__( 'Meta box4 Headline', RESTAURANT_BOOKING_TEXTDOMAIN ),
-			'callback'      => 'render_content',
-			'screens'       => array( 'post', 'page' ),//null - optional
-			'context'       => 'side', //optional
-			'priority'      => 'high', //optional
-			'callback_args' => null, //optional
-			'meta_key'      => '_restaurant_booking_meta_box_key_4',
-			'single'        => false, //the result of get_post_meta Will be an array if $single is false
-			'action'        => 'restaurant_booking_meta_box4',
-			'nonce_name'    => 'restaurant_booking_meta_box4_nonce'
-
-		];
-
-		return $initial_value;
-	}
-
-	/**
 	 * Initial values for sample shortcode  1
 	 *
 	 * @access public
@@ -186,9 +130,9 @@ class Initial_Value {
 	 * @access public
 	 * @return array It returns all of arguments that shortcode class needs.
 	 */
-	public function sample_complete_shortcode() {
+	public function get_booking_shortcode_values() {
 		$initial_value = [
-			'tag'          => 'msn_new_complete_shortcode',
+			'tag'          => 'msn_booking_shortcode',
 			'default_atts' => [
 				'link' => 'https://wpwebmaster.ir',
 				'name' => 'Webmaster WordPress'

@@ -94,6 +94,7 @@ abstract class Shortcode implements Action_Hook_Interface {
 	 */
 	public function register_add_action() {
 		add_action( 'init', array( $this, 'register_shortcode' ) );
+
 	}
 
 	/**
@@ -102,9 +103,8 @@ abstract class Shortcode implements Action_Hook_Interface {
 	 * @access  public
 	 */
 	public function register_shortcode() {
-		add_shortcode( $this->tag, array( $this, 'define_shortcode_handler' ) );
+		add_shortcode( $this->tag, array( $this, 'set_shortcode_handler' ) );
 	}
-
 
 	/**
 	 * Abstract Method define_shortcode in Shortcode Class
@@ -118,6 +118,6 @@ abstract class Shortcode implements Action_Hook_Interface {
 	 * @param string $content The content between starting and closing shortcode tag
 	 * @param string $tag     The name of the shortcode tag
 	 */
-	abstract public function define_shortcode_handler( $atts = [], $content = null, $tag = '' );
+	abstract public function set_shortcode_handler( $atts = [], $content = null, $tag = '' );
 
 }

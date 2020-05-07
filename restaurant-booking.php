@@ -37,9 +37,7 @@ use Restaurant_Booking\Includes\Admin\{
 	Notices\Admin_Notice1, Notices\Woocommerce_Deactive_Notice
 };
 
-use Restaurant_Booking\Includes\Parts\Shortcodes\{
-	Shortcode1, Content_For_Login_User_Shortcode, Complete_Shortcode
-};
+use Restaurant_Booking\Includes\Parts\Shortcodes\Booking_Shortcode;
 use Restaurant_Booking\Includes\Parts\Custom_Posts\Booking_Custom_Post;
 use Restaurant_Booking\Includes\Hooks\Filters\Custom_Cron_Schedule;
 
@@ -99,12 +97,11 @@ final class Restaurant_Booking_Plugin {
 	public function __construct() {
 		/*Define Autoloader class for plugin*/
 		$autoloader_path     = 'includes/class-autoloader.php';
-		$cmb2_functions_file = 'vendor/cmb-functions.php';
 		/**
 		 * Include autoloader class to load all of classes inside this plugin
 		 */
 		require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $autoloader_path;
-		require_once trailingslashit( plugin_dir_path( __FILE__ ) ) . $cmb2_functions_file;
+
 		/*Define required constant for plugin*/
 		Constant::define_constant();
 
@@ -234,9 +231,7 @@ final class Restaurant_Booking_Plugin {
 				new Admin_Sub_Menu2( $this->initial_values->sample_sub_menu_page2() ),
 			],
 			[
-				new Shortcode1( $this->initial_values->sample_shortcode1() ),
-				new Complete_Shortcode( $this->initial_values->sample_complete_shortcode() ),
-				new Content_For_Login_User_Shortcode( $this->initial_values->sample_content_for_login_user_shortcode() ),
+				new Booking_Shortcode( $this->initial_values->get_booking_shortcode_values() ),
 			],
 			[
 				new Booking_Custom_Post( $this->initial_values->get_booking_custom_post_type_values() )

@@ -17,6 +17,7 @@ namespace Restaurant_Booking\Includes\Init;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 /**
  * Class Constant
  *
@@ -69,6 +70,14 @@ class Constant {
 		 */
 		if ( ! defined( 'RESTAURANT_BOOKING_URL' ) ) {
 			define( 'RESTAURANT_BOOKING_URL', trailingslashit( plugin_dir_url( dirname( dirname( __FILE__ ) ) ) ) );
+		}
+
+		/**
+		 * RESTAURANT_BOOKING_ASSETS constant.
+		 * It is used to specify assets urls inside assets directory.
+		 */
+		if ( ! defined( 'RESTAURANT_BOOKING_ASSETS' ) ) {
+			define( 'RESTAURANT_BOOKING_ASSETS', trailingslashit( RESTAURANT_BOOKING_URL ) . 'assets/' );
 		}
 
 		/**
@@ -209,7 +218,7 @@ class Constant {
 		 * RESTAURANT_BOOKING_VERSION constant.
 		 * It defines version of plugin for management tasks in your plugin
 		 */
-		if ( ! defined( 'RESTAURANT_BOOKING_VERSION') ) {
+		if ( ! defined( 'RESTAURANT_BOOKING_VERSION' ) ) {
 			define( 'RESTAURANT_BOOKING_VERSION', '1.0.1' );
 		}
 
@@ -217,7 +226,7 @@ class Constant {
 		 * RESTAURANT_BOOKING_PLUGIN constant.
 		 * It defines name of plugin for management tasks in your plugin
 		 */
-		if ( ! defined( 'RESTAURANT_BOOKING_PLUGIN') ) {
+		if ( ! defined( 'RESTAURANT_BOOKING_PLUGIN' ) ) {
 			define( 'RESTAURANT_BOOKING_PLUGIN', 'restaurant-booking' );
 		}
 
@@ -228,7 +237,7 @@ class Constant {
 		 * You can use from this constant to apply your changes in updates or
 		 * activate plugin again
 		 */
-		if ( ! defined( 'RESTAURANT_BOOKING_DB_VERSION') ) {
+		if ( ! defined( 'RESTAURANT_BOOKING_DB_VERSION' ) ) {
 			define( 'RESTAURANT_BOOKING_DB_VERSION', 1 );
 		}
 
@@ -237,7 +246,7 @@ class Constant {
 		 *
 		 * It defines text domain name for plugin
 		 */
-		if ( ! defined( 'RESTAURANT_BOOKING_TEXTDOMAIN') ) {
+		if ( ! defined( 'RESTAURANT_BOOKING_TEXTDOMAIN' ) ) {
 			define( 'RESTAURANT_BOOKING_TEXTDOMAIN', 'restaurant-booking-textdomain' );
 		}
 		/*In future maybe I want to add constants for separated upload directory inside plugin directory*/
