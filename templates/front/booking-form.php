@@ -1,6 +1,7 @@
 <div class="msn-flex-container">
     <div class="wrapper">
-        <form action="" id="msn-wizard" method="post">
+        <div id="msn_error_message" class="msn-display-none" ></div>
+        <form action="" id="msn_booking_form" method="post">
             <section>
                 <h3>Book your table</h3>
                 <div class="msn-text-center msn-margin-2 msn-color-red msn-font-size-1">
@@ -45,7 +46,7 @@
                 </div>
                 <div class="form-row msn-submit-row">
                     <div class="form-holder">
-                        <input type="submit" name="submit" id="submit" class="form-control msn-submit-button msn-color-white msn-bg-red"
+                        <input type="submit" name="first_submit" id="first_submit" class="form-control msn-submit-button msn-color-white msn-bg-red"
                                value="Reserve a table">
                     </div>
                 </div>
@@ -56,3 +57,4 @@
         </form>
     </div>
 </div>
+<div id="msn_pre_code"></div>

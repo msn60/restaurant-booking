@@ -59,6 +59,8 @@ class Booking_Fields extends CMB2_Fields {
 
 		$this->cmb2_object->add_field( $this->cmb2_fields['reserve_id'] );
 
+		$this->cmb2_object->add_field( $this->cmb2_fields['confirmation_status'] );
+
 		$this->cmb2_object->add_field( $this->cmb2_fields['reservation_name'] );
 
 		$this->cmb2_object->add_field( $this->cmb2_fields['guest_count'] );

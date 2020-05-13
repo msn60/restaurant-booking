@@ -118,7 +118,7 @@ class Booking_Shortcode extends Shortcode {
 	 * @see https://wpquark.com/kb/misc/wordpress/themes-jquery-jquery-ui-enqueue-problem/
 	 */
 	public function enqueue_shortcode_scripts() {
-
+		//TODO: Add site key to setting page
 		wp_enqueue_script(
 			'google-recaptcha-script',
 			'https://www.google.com/recaptcha/api.js?render='.$this->recaptcha_site_key,

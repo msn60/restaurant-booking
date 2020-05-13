@@ -113,14 +113,14 @@ class Public_Hook implements Action_Hook_Interface {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
 		wp_enqueue_script(
-			$this->plugin_name . '-public-script',
+			RESTAURANT_BOOKING_PLUGIN . '-public-script',
 			RESTAURANT_BOOKING_JS . 'restaurant-booking-public-ver-' . RESTAURANT_BOOKING_JS_VERSION . '.js',
 			array( 'jquery' ),
 			null,
 			true
 		);
+
 	}
 
 	/**

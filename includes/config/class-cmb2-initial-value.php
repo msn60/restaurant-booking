@@ -73,7 +73,7 @@ class CMB2_Initial_Value {
 
 	public function get_cmb2_fields() {
 		$initial_value = [
-			'reserve_id'       => [
+			'reserve_id'          => [
 				'name'       => esc_html__( 'Booking ID', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'desc'       => esc_html__( 'Reservation number for table booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'id'         => 'msn_booking_reserve_id',
@@ -85,41 +85,54 @@ class CMB2_Initial_Value {
 					'readonly' => 'readonly',
 				),
 			],
-			'reservation_name' => [
+			'confirmation_status' => [
+				'name'       => esc_html__( 'Confirmation Status', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'desc'       => esc_html__( 'State of payment for reservation', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'id'         => 'msn_booking_confirmation_status',
+				'type'       => 'text_medium',
+				'column'     => true,
+				'default'    => esc_attr__( 'Uncompleted', RESTAURANT_BOOKING_TEXTDOMAIN ),
+				'save_field' => false, // Disables the saving of this field.
+				'attributes' => array(
+					'disabled' => 'disabled',
+					'readonly' => 'readonly',
+				),
+			],
+			'reservation_name'    => [
 				'name'   => esc_html__( 'Reservation Name', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'desc'   => esc_html__( 'Name and Family', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'id'     => 'msn_booking_reservation_name',
 				'type'   => 'text_medium',
 				'column' => true,
 			],
-			'guest_count'      => [
+			'guest_count'         => [
 				'name' => esc_html__( 'Guests', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'desc' => esc_html__( 'Number of guests', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'id'   => 'msn_booking_guest_count',
 				'type' => 'text_number',
 			],
-			'phone_number'     => [
+			'phone_number'        => [
 				'name'   => esc_html__( 'Phone', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'desc'   => esc_html__( 'Reservation phone number', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'id'     => 'msn_booking_phone_number',
 				'type'   => 'text_medium',
 				'column' => true,
 			],
-			'email'            => [
+			'email'               => [
 				'name' => esc_html__( 'Email', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'desc' => esc_html__( 'Reservation email address', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'id'   => 'msn_booking_email_address',
 				'type' => 'text_email',
 			],
-			'date'             => [
-				'name' => esc_html__( 'Reservation Date', RESTAURANT_BOOKING_TEXTDOMAIN ),
+			'date'                => [
+				'name'        => esc_html__( 'Reservation Date', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				//'desc' => esc_html__( 'field description (optional)', RESTAURANT_BOOKING_TEXTDOMAIN ),
-				'id'   => 'msn_booking_date',
-				'type' => 'text_date',
+				'id'          => 'msn_booking_date',
+				'type'        => 'text_date',
 				'date_format' => 'Y-m-d',
 				'column'      => true,
 			],
-			'time'             => [
+			'time'                => [
 				'name'        => esc_html__( 'Reservation Time', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				//'desc'        => esc_html__( 'field description (optional)', RESTAURANT_BOOKING_TEXTDOMAIN ),
 				'id'          => 'msn_booking_time',
@@ -127,6 +140,7 @@ class CMB2_Initial_Value {
 				'time_format' => 'H:i', // Set to 24hr format
 				'column'      => true,
 			],
+
 		];
 
 		return $initial_value;

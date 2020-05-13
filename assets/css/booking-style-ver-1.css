@@ -463,6 +463,34 @@ body .msn-flex-container {
     color: white !important;
 }
 
+div#msn_error_message {
+    padding: 1.5rem;
+    border: 2px solid red;
+    border-radius: 4px;
+    text-align: center;
+    margin: 1rem;
+}
+
+#msn_error_message h2 {
+    color: red !important;
+    line-height: 3rem !important;
+    font-family: "Lato-Regular", Arial, sans-serif !important;
+}
+
+#msn_error_message p {
+    color: blue;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+}
+
+.msn-display-none {
+    display: none !important;
+    -webkit-transition: all 3s ease-in-out;
+    -moz-transition: all 3s ease-in-out;
+    -o-transition: all 3s ease-in-out;
+    transition: all 3s ease-in-out;
+}
+
 @media (max-width: 991px) {
     .msn-flex-container .steps ul li .step-arrow {
         top: 45%;

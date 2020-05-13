@@ -57,8 +57,9 @@ abstract class Ajax implements Action_Hook_Interface {
 	 * @param string $action Action name for ajax call
 	 */
 	public function __construct( $action ) {
+		require_once( ABSPATH . 'wp-includes/pluggable.php' );
 		$this->ajax_url   = admin_url( 'admin-ajax.php' );
-		$this->ajax_nonce = wp_create_nonce( 'sample_ajax_nonce' );
+		$this->ajax_nonce = wp_create_nonce( 'msn_booking_ajax_nonce' );
 		$this->action     = $action;
 
 	}
@@ -88,8 +89,8 @@ abstract class Ajax implements Action_Hook_Interface {
 	public function register_script() {
 		//only use when you u
 		/*wp_enqueue_script(
-			MSN_THEME_NAME . '-script',
-			THEME_NAME_JS . 'theme-name-ver-' . THEME_NAME_JS_VERSION . '.js',
+			RESTAURANT_BOOKING_PLUGIN  . '-public-script',
+			RESTAURANT_BOOKING_JS . 'restaurant-booking-public-ver-' . RESTAURANT_BOOKING_JS_VERSION . '.js',
 			array( 'jquery' ),
 			null,
 			true
@@ -97,8 +98,7 @@ abstract class Ajax implements Action_Hook_Interface {
 		/*
 		 * localize script to handle ajax call
 		 * */
-		wp_localize_script( MSN_THEME_NAME . '-script', 'data', $this->sending_ajax_data() );
-		// TODO: customize it for ajax in plugin not theme
+		wp_localize_script( RESTAURANT_BOOKING_PLUGIN . '-public-script', 'global_booking_data', $this->sending_ajax_data() );
 	}
 
 
@@ -113,10 +113,9 @@ abstract class Ajax implements Action_Hook_Interface {
 	 */
 	public function sending_ajax_data() {
 		$initial_value = [
-			'ajax_url'         => $this->ajax_url,
-			'ajax_nonce'       => $this->ajax_nonce,
-			'msn_ajax_sample'  => 'Ajax sample for OOP theme starter',
-			'msn_ajax_sample2' => 'Ajax sample for OOP theme starter',
+			'ajax_url'        => $this->ajax_url,
+			'ajax_nonce'      => $this->ajax_nonce,
+			'msn_ajax_sample' => 'Ajax sample for OOP plugin',
 		];
 
 		return $initial_value;
@@ -125,7 +124,11 @@ abstract class Ajax implements Action_Hook_Interface {
 	/*
 	 * Handle method for ajax request in back-end
 	 * */
-	abstract public function handle();
+	//abstract public function handle();
+
+	public function handle() {
+
+	}
 
 	/**
 	 * Sends a JSON response with the details of the given error.

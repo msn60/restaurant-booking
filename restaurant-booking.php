@@ -38,6 +38,7 @@ use Restaurant_Booking\Includes\Admin\{
 
 use Restaurant_Booking\Includes\Parts\Shortcodes\Booking_Shortcode;
 use Restaurant_Booking\Includes\Parts\Custom_Posts\Booking_Custom_Post;
+use Restaurant_Booking\Includes\Parts\Ajax\Booking_Ajax;
 
 /**
  * If this file is called directly, then abort execution.
@@ -240,6 +241,9 @@ final class Restaurant_Booking_Plugin {
 			[
 				'admin_notice1'                 => new Admin_Notice1(),
 				'woocommerce_deactivate_notice' => new Woocommerce_Deactive_Notice(),
+			],
+			[
+				new Booking_Ajax('msn_booking_ajax_call'),
 			]
 		);
 		$this->core_object->init_core();

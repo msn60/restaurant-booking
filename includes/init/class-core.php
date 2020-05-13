@@ -238,6 +238,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 
 		$this->set_custom_posts();
 		$this->set_cmb2_boxes();
+		$this->set_ajax_call();
 		$this->show_admin_notice();
 		//$this->show_plugin_activation_error();
 
@@ -308,6 +309,20 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		if ( ! is_null( $this->shortcodes ) ) {
 			foreach ( $this->shortcodes as $shortcode ) {
 				$shortcode->register_add_action();
+			}
+		}
+	}
+
+	/**
+	 * Method to set all of needed shortcodes for your plugin
+	 *
+	 * @access private
+	 * @since  1.0.1
+	 */
+	private function set_ajax_call() {
+		if ( ! is_null( $this->ajax_calls) ) {
+			foreach ( $this->ajax_calls as $ajax_call ) {
+				$ajax_call->register_add_action();
 			}
 		}
 	}
