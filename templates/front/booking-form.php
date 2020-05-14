@@ -1,6 +1,7 @@
 <div class="msn-flex-container">
     <div class="wrapper">
         <div id="msn_error_message" class="msn-display-none" ></div>
+        <!-- TODO: add auto complete to form and its elements -->
         <form action="" id="msn_booking_form" method="post">
             <section>
                 <h3>Book your table</h3>

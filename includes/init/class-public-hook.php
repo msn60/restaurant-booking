@@ -136,6 +136,7 @@ class Public_Hook implements Action_Hook_Interface {
 	 */
 	public function set_enqueue_scripts_action() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		//TODO: only load in booking page - not whole site or defer for increasing speed
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 }

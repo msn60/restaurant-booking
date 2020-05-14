@@ -5,7 +5,7 @@
 };*/
 (function ($) {
     $('.datepicker').pickadate({
-        format: 'yyyy-m-d'
+        format: 'yyyy-mm-dd'
     });
     $('.timepicker').pickatime({
             format: 'HH:i',

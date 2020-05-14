@@ -477,6 +477,16 @@ div#msn_error_message {
     font-family: "Lato-Regular", Arial, sans-serif !important;
 }
 
+#msn_error_message h3 {
+    line-height: 2.8rem !important;
+    font-family: "Lato-Regular", Arial, sans-serif !important;
+    font-size: 1.2rem !important;
+    font-weight: normal !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 0 !important;
+    text-transform: none !important;
+}
+
 #msn_error_message p {
     color: blue;
     font-size: 1.1rem;
