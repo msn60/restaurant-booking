@@ -17,6 +17,9 @@
  *
  */
 
+//TODO: increase recaptcha time
+// https://stackoverflow.com/questions/44820652/increase-recaptcha-expiration-time/49908226
+// https://stackoverflow.com/questions/55251837/how-to-solve-google-v3-recaptcha-timeout
 function show_recatpcha_issues(result) {
     msn_error_message.classList.remove('msn-display-none');
     let p_element = document.createElement('p');

@@ -40,6 +40,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 	protected $email_address;
 	protected $date;
 	protected $time;
+	protected $post_id;
 
 	/**
 	 * Main constructor.
@@ -86,12 +87,20 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 				$this->sanitize_input_fields( $_POST );
 				$this->check_guest_number();
 				$this->set_confirmation_status();
-				$this->set_reserve_id();
-				/*$temp = [
-					'name' => $this->reservation_name,
-					'id'   => $this->reserve_id
-				];*/
-				wp_die( json_encode( $this ) );
+				$this->post_id = $this->add_new_booking();
+				if ( $this->post_id ) {
+					$this->set_reserve_id();
+				} else {
+					//TODO: adjust to get phone number to call dynamically (not hard code)
+					$this->return_with_problem(
+						'Problem in submitting your reserve',
+						'We can not add your reservation in our system. Please try again or call with: 22332233',
+						false
+					);
+				}
+				//TODO: sending confirmation email for reserver and also owner
+				$this->send_reservation_detail();
+
 
 			} else {
 				$this->return_with_problem(
@@ -147,10 +156,44 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		}
 	}
 
-	private function set_reserve_id() {
-		$this->reserve_id = 'msn-20200398';
+	private function add_new_booking() {
+		$post_id = wp_insert_post(
+			[
+				'post_title'  => $this->reservation_name . ' - ' . $this->date,
+				'post_type'   => 'msn-booking',
+				'post_status' => 'publish',
+				'meta_input'  => [
+					'msn_booking_reservation_name'    => $this->reservation_name,
+					'msn_booking_guest_count'         => $this->guest_count,
+					'msn_booking_phone_number'        => $this->phone_number,
+					'msn_booking_email_address'       => $this->email_address,
+					'msn_booking_date'                => $this->date,
+					'msn_booking_time'                => $this->time,
+					//TODO: get number of guest from settings (not hard code)
+					'msn_booking_confirmation_status' => $this->guest_count > 10 ? 'Uncompleted' : 'Completed',
+
+				]
+			]
+		);
+
+		return $post_id;
+
 	}
 
+	private function set_reserve_id() {
+		$this->reserve_id = str_replace( '-', '', $this->date );
+		$this->reserve_id .= rand( 1001, 9999 );
+		add_post_meta( $this->post_id, 'msn_booking_reserve_id', $this->reserve_id );
+	}
+
+	private function send_reservation_detail() {
+		$temp_object = $this;
+		unset( $temp_object->ajax_nonce );
+		unset( $temp_object->ajax_url );
+		unset( $temp_object->action );
+		unset( $temp_object->post_id );
+		wp_die( json_encode( $temp_object ) );
+	}
 
 	/**
 	 * Specify data which should be serialized to JSON
