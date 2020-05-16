@@ -471,8 +471,22 @@ div#msn_error_message {
     margin: 1rem;
 }
 
+div#msn_reservation_detail {
+    padding: 1.5rem;
+    border: 2px solid green;
+    border-radius: 4px;
+    text-align: center;
+    margin: 1rem;
+}
+
 #msn_error_message h2 {
     color: red !important;
+    line-height: 3rem !important;
+    font-family: "Lato-Regular", Arial, sans-serif !important;
+}
+
+#msn_reservation_detail h2 {
+    color: green !important;
     line-height: 3rem !important;
     font-family: "Lato-Regular", Arial, sans-serif !important;
 }
@@ -487,10 +501,19 @@ div#msn_error_message {
     text-transform: none !important;
 }
 
-#msn_error_message p {
+#msn_error_message p, #msn_reservation_detail p {
     color: blue;
     font-size: 1.1rem;
     line-height: 1.8rem;
+}
+
+.msn-reservation-detail-box {
+    margin: 1.3rem !important;
+}
+.msn-reservation-detail-box p {
+    color: black !important;
+    font-size: 1.1rem!important;
+    line-height: 1.8rem!important;
 }
 
 .msn-display-none {

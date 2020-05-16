@@ -37,6 +37,26 @@ function show_recatpcha_issues(result) {
 
 }
 
+function show_reservation_detail(result) {
+
+    msn_reservation_detail.classList.remove('msn-display-none');
+    let p_element = document.createElement('p');
+    p_element.innerHTML = 'This is detail information of your booking';
+    let h2_element = document.createElement('h2');
+    h2_element.innerHTML = 'Your table booking was successful';
+    let main_detail_div_element = document.createElement('div');
+    main_detail_div_element.classList.add('msn-reservation-detail-box');
+    let temp_element;
+    for (const [key, value] of Object.entries(result)) {
+        temp_element = document.createElement('p');
+        temp_element.innerHTML = key + ' : ' + value;
+        main_detail_div_element.appendChild(temp_element);
+    }
+    msn_reservation_detail.appendChild(h2_element);
+    msn_reservation_detail.appendChild(p_element);
+    msn_reservation_detail.appendChild(main_detail_div_element);
+}
+
 function reload_google_reptcha() {
     grecaptcha.execute('6LfaVvMUAAAAAOPHKXivJXzqh5H-gKUf7f1YBRhA', {action: 'contact'}).then(function (token) {
         let recaptchaResponse = document.getElementById('recaptchaResponse');
@@ -72,8 +92,16 @@ function send_booking_request(e) {
 
         } else {
             //TODO: remove reloading recaptcha after testing this section
-            reload_google_reptcha();
-            console.log(result);
+            //reload_google_reptcha();
+            msn_booking_form.remove();
+            if (result.reserve_id) {
+                if ("Completed" == result.confirmation_status) {
+                    show_reservation_detail(result);
+                } else {
+                    console.log(result);
+                }
+            }
+
         }
 
 
@@ -94,9 +122,11 @@ function init() {
     submit_button.addEventListener('click', send_booking_request);
 
 }
+
 //TODO: only use recaptcha in this file (not in separated file)
 let submit_button = document.getElementById('first_submit');
 let msn_code_part = document.getElementById('msn_pre_code');
 let msn_booking_form = document.getElementById('msn_booking_form');
 let msn_error_message = document.getElementById('msn_error_message');
+let msn_reservation_detail = document.getElementById('msn_reservation_detail');
 document.addEventListener("DOMContentLoaded", init);
