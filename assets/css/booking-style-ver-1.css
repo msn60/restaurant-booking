@@ -501,7 +501,7 @@ div#msn_reservation_detail {
     text-transform: none !important;
 }
 
-#msn_error_message p, #msn_reservation_detail p {
+#msn_error_message p, #msn_reservation_detail p, #msn_conditional_reservation p {
     color: blue;
     font-size: 1.1rem;
     line-height: 1.8rem;
@@ -510,10 +510,41 @@ div#msn_reservation_detail {
 .msn-reservation-detail-box {
     margin: 1.3rem !important;
 }
+
 .msn-reservation-detail-box p {
     color: black !important;
-    font-size: 1.1rem!important;
-    line-height: 1.8rem!important;
+    font-size: 1.1rem !important;
+    line-height: 1.8rem !important;
+}
+
+#msn_conditional_reservation input.msn-food-button {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: grab;
+}
+
+#msn_conditional_reservation h2 {
+    border: 3px solid red;
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+    color: red !important;
+    line-height: 3rem !important;
+    font-family: "Lato-Regular", Arial, sans-serif !important;
+    margin: 1rem;
+}
+
+#msn_conditional_reservation h3 {
+    padding: 2rem;
+    text-align: center;
+    line-height: 3rem !important;
+    font-family: "Lato-Regular", Arial, sans-serif !important;
+}
+
+#msn_conditional_reservation .msn-submit-row.form-row .form-holder {
+    width: 70% !important;
 }
 
 .msn-display-none {

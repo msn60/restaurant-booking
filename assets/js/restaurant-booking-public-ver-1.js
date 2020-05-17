@@ -57,6 +57,29 @@ function show_reservation_detail(result) {
     msn_reservation_detail.appendChild(main_detail_div_element);
 }
 
+function show_conditional_reservation($result) {
+    msn_conditional_reservation.classList.remove('msn-display-none');
+    let p_element1 = document.createElement('p');
+    p_element1.innerHTML = 'Your guest number is greater than 10 person.';
+    let p_element2 = document.createElement('p');
+    p_element2.innerHTML = 'To complete your reservation, you must select foods that you want to serve for reservation time';
+    let p_element3 = document.createElement('p');
+    p_element3.innerHTML = 'After checkout of your payment, your table will be reserved';
+    let h2_element = document.createElement('h2');
+    h2_element.innerHTML = 'Only one step to complete your reservation!!!';
+    let h3_element = document.createElement('h3');
+    h3_element.innerHTML = 'Please select your food:';
+    msn_conditional_reservation.insertBefore(h3_element,msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(p_element3,msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(p_element2,msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(p_element1,msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(h2_element,msn_conditional_reservation.childNodes[0]);
+
+
+
+
+}
+
 function reload_google_reptcha() {
     grecaptcha.execute('6LfaVvMUAAAAAOPHKXivJXzqh5H-gKUf7f1YBRhA', {action: 'contact'}).then(function (token) {
         let recaptchaResponse = document.getElementById('recaptchaResponse');
@@ -95,9 +118,11 @@ function send_booking_request(e) {
             //reload_google_reptcha();
             msn_booking_form.remove();
             if (result.reserve_id) {
-                if ("Completed" == result.confirmation_status) {
+                if ("Completed" === result.confirmation_status) {
                     show_reservation_detail(result);
-                } else {
+                }
+                if ("Uncompleted" == result.confirmation_status) {
+                    show_conditional_reservation(result);
                     console.log(result);
                 }
             }
@@ -129,4 +154,6 @@ let msn_code_part = document.getElementById('msn_pre_code');
 let msn_booking_form = document.getElementById('msn_booking_form');
 let msn_error_message = document.getElementById('msn_error_message');
 let msn_reservation_detail = document.getElementById('msn_reservation_detail');
+let msn_conditional_reservation = document.getElementById('msn_conditional_reservation');
+// https://nayeb.local/wp-json/wc/v3/products?per_page=20&consumer_key=ck_cb0f7a9a7adcf29b3066fc2bee4d344f1234daba&consumer_secret=cs_008c2a10c302258236fd21f51c026f0c7118beec
 document.addEventListener("DOMContentLoaded", init);

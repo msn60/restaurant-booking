@@ -36,11 +36,14 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 	protected $confirmation_status;
 	protected $reservation_name;
 	protected $guest_count;
+	protected $default_comparing_guest_count;
 	protected $phone_number;
 	protected $email_address;
 	protected $date;
 	protected $time;
 	protected $post_id;
+	protected $consumer_key;
+	protected $consumer_secret;
 
 	/**
 	 * Main constructor.
@@ -53,6 +56,10 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 	 */
 	public function __construct( $action ) {
 		parent::__construct( $action );
+		//TODO: put it in setting
+		$this->default_comparing_guest_count = 10;
+		$this->consumer_key                  = 'ck_9ee08c94c8ec32eb0977b36d0290184ee5253029';
+		$this->consumer_secret               = 'cs_d0770dba19b6758c67c5e9b61268543be5cceb4b';
 	}
 
 
@@ -124,7 +131,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 
 	private function check_guest_number() {
 		//TODO: add this section to setting page
-		if ( $this->guest_count <= 0 or $this->guest_count >= 40 ) {
+		if ( $this->guest_count <= 0 or $this->guest_count >= 60 ) {
 			$this->return_with_problem(
 				'Guest numbers',
 				'The maximum of guest count can be 40 person. You put out of range guest number. Please refresh the page and try to submit form again.',
@@ -149,7 +156,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 	}
 
 	private function set_confirmation_status() {
-		if ( $this->guest_count <= 10 ) {
+		if ( $this->guest_count <= $this->default_comparing_guest_count ) {
 			$this->confirmation_status = 'Completed';
 		} else {
 			$this->confirmation_status = 'Uncompleted';
@@ -170,7 +177,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 					'msn_booking_date'                => $this->date,
 					'msn_booking_time'                => $this->time,
 					//TODO: get number of guest from settings (not hard code)
-					'msn_booking_confirmation_status' => $this->guest_count > 10 ? 'Uncompleted' : 'Completed',
+					'msn_booking_confirmation_status' => $this->guest_count > $this->default_comparing_guest_count ? 'Uncompleted' : 'Completed',
 
 				]
 			]
@@ -191,7 +198,13 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		unset( $temp_object->ajax_nonce );
 		unset( $temp_object->ajax_url );
 		unset( $temp_object->action );
-		unset( $temp_object->post_id );
+		if ( $this->guest_count <= $this->default_comparing_guest_count ) {
+			unset( $temp_object->consumer_key );
+			unset( $temp_object->consumer_secret );
+			unset( $temp_object->post_id );
+		}
+		unset( $temp_object->default_comparing_guest_count );
+		setcookie("TestCookie", "amghez", 50000000);
 		wp_die( json_encode( $temp_object ) );
 	}
 

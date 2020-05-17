@@ -1,7 +1,21 @@
 <div class="msn-flex-container">
     <div class="wrapper">
-        <div id="msn_error_message" class="msn-display-none" ></div>
-        <div id="msn_reservation_detail" class="msn-display-none" ></div>
+        <div id="msn_error_message" class="msn-display-none"></div>
+        <div id="msn_reservation_detail" class="msn-display-none"></div>
+        <div id="msn_conditional_reservation" class="msn-display-none">
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="button" name="msn_persian_food" id="msn_persian_food" class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                           value="Select Persian Foods">
+                </div>
+            </div>
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="button" name="msn_persian_food" id="msn_persian_food" class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                           value="Select Indian Foods">
+                </div>
+            </div>
+        </div>
         <!-- TODO: add auto complete to form and its elements -->
         <form action="" id="msn_booking_form" method="post">
             <section>
