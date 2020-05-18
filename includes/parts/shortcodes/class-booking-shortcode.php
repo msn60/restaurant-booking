@@ -49,7 +49,7 @@ class Booking_Shortcode extends Shortcode {
 	 * @return string
 	 */
 	public function set_shortcode_handler( $atts = [], $content = null, $tag = '' ) {
-		$this->recaptcha_site_key = get_option('msn_booking_recaptcha_site_key');
+		$this->recaptcha_site_key = get_option( 'msn_booking_recaptcha_site_key' );
 		$this->enqueue_shortcode_styles();
 		$this->enqueue_shortcode_scripts();
 
@@ -61,7 +61,8 @@ class Booking_Shortcode extends Shortcode {
 		/*return '<div>Hi ' . $args["name"] . '</div>';*/
 		//$this->load_template('temp-backend',[]);
 		ob_start();
-		$this->load_template('booking-form', array(), 'front' );
+		$this->load_template( 'booking-form', array(), 'front' );
+
 		return ob_get_clean();
 
 	}
@@ -121,7 +122,7 @@ class Booking_Shortcode extends Shortcode {
 		//TODO: Add site key to setting page
 		wp_enqueue_script(
 			'google-recaptcha-script',
-			'https://www.google.com/recaptcha/api.js?render='.$this->recaptcha_site_key,
+			'https://www.google.com/recaptcha/api.js?render=' . $this->recaptcha_site_key,
 			[],
 			null,
 			true
@@ -171,12 +172,13 @@ class Booking_Shortcode extends Shortcode {
 			true
 		);
 		wp_enqueue_script(
-			'msn-booking-main-script',
-			RESTAURANT_BOOKING_JS . 'booking-script-ver-1.js',
+			'msn-booking-run-date-time-script',
+			RESTAURANT_BOOKING_JS . 'run-date-time-script.js',
 			[ 'jquery', 'msn-booking-default-date-script', 'msn-booking-date-script', 'msn-booking-time-script' ],
 			null,
 			true
 		);
+
 	}
 
 	/**

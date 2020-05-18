@@ -207,7 +207,7 @@ class Constant {
 			define( 'RESTAURANT_BOOKING_ADMIN_CSS_VERSION', 1 );
 		}
 		/**
-		 * RESTAURANT_BOOKING_JS_VERSION constant.
+		 * RESTAURANT_BOOKING_ADMIN_JS_VERSION constant.
 		 * You can use from this constant to apply on main JS file when you have changed it.
 		 */
 		if ( ! defined( 'RESTAURANT_BOOKING_ADMIN_JS_VERSION' ) ) {

@@ -44,6 +44,8 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 	protected $post_id;
 	protected $consumer_key;
 	protected $consumer_secret;
+	protected $table_reservation_product_id;
+	protected $table_reservation_product_price;
 
 	/**
 	 * Main constructor.
@@ -58,8 +60,41 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		parent::__construct( $action );
 		//TODO: put it in setting
 		$this->default_comparing_guest_count = 10;
-		$this->consumer_key                  = 'ck_9ee08c94c8ec32eb0977b36d0290184ee5253029';
-		$this->consumer_secret               = 'cs_d0770dba19b6758c67c5e9b61268543be5cceb4b';
+		//TODO: put it in setting
+		$this->table_reservation_product_id    = 2135;
+		$this->table_reservation_product_price = get_post_meta( $this->table_reservation_product_id, '_regular_price', true );
+		$this->confirmation_status             = 'Uncompleted';
+		$this->consumer_key                    = 'ck_9ee08c94c8ec32eb0977b36d0290184ee5253029';
+		$this->consumer_secret                 = 'cs_d0770dba19b6758c67c5e9b61268543be5cceb4b';
+	}
+
+	/**
+	 * Method to register script and localize it
+	 *
+	 * @access public
+	 * @since  1.0.1
+	 *
+	 */
+	public function register_script() {
+		//only use when you u
+		/*wp_enqueue_script(
+			RESTAURANT_BOOKING_PLUGIN  . '-public-script',
+			RESTAURANT_BOOKING_JS . 'restaurant-booking-public-ver-' . RESTAURANT_BOOKING_JS_VERSION . '.js',
+			array( 'jquery' ),
+			null,
+			true
+		);*/
+		wp_enqueue_script(
+			'msn-booking-script-ver-1',
+			RESTAURANT_BOOKING_JS . 'booking-script-ver-1.js',
+			[ 'jquery' ],
+			null,
+			true
+		);
+		/*
+		 * localize script to handle ajax call
+		 * */
+		wp_localize_script( 'msn-booking-script-ver-1', 'global_booking_data', $this->sending_ajax_data() );
 	}
 
 
@@ -93,7 +128,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 			if ( $recaptcha->score >= 0.5 ) {
 				$this->sanitize_input_fields( $_POST );
 				$this->check_guest_number();
-				$this->set_confirmation_status();
+				//$this->set_confirmation_status();
 				$this->post_id = $this->add_new_booking();
 				if ( $this->post_id ) {
 					$this->set_reserve_id();
@@ -155,14 +190,6 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		wp_die( json_encode( $result ) );
 	}
 
-	private function set_confirmation_status() {
-		if ( $this->guest_count <= $this->default_comparing_guest_count ) {
-			$this->confirmation_status = 'Completed';
-		} else {
-			$this->confirmation_status = 'Uncompleted';
-		}
-	}
-
 	private function add_new_booking() {
 		$post_id = wp_insert_post(
 			[
@@ -201,10 +228,9 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		if ( $this->guest_count <= $this->default_comparing_guest_count ) {
 			unset( $temp_object->consumer_key );
 			unset( $temp_object->consumer_secret );
-			unset( $temp_object->post_id );
 		}
 		unset( $temp_object->default_comparing_guest_count );
-		setcookie("TestCookie", "amghez", 50000000);
+		setcookie( "msn_reserve_id", $this->post_id, time() + ( 86400 * 2 ), "/" );
 		wp_die( json_encode( $temp_object ) );
 	}
 
@@ -220,5 +246,13 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		$vars = get_object_vars( $this );
 
 		return $vars;
+	}
+
+	private function set_confirmation_status() {
+		if ( $this->guest_count <= $this->default_comparing_guest_count ) {
+			$this->confirmation_status = 'Completed';
+		} else {
+			$this->confirmation_status = 'Uncompleted';
+		}
 	}
 }

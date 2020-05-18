@@ -149,6 +149,13 @@ class Initial_Value {
 	 * @return array It returns all of arguments that Booking_Custom_Post class needs.
 	 */
 	public function get_booking_custom_post_type_values() {
+		//TODO: Add notification counter in custom post type
+		/**
+		 * @see https://wisdmlabs.com/blog/display-dashboard-notifications-custom-post-types-menus/
+		 * @see https://rudrastyh.com/wordpress/notification-counter-bubbles.html
+		 * @see https://www.skyverge.com/blog/add-admin-menu-notification-bubble/
+		 * @see https://stackoverflow.com/questions/8625674/how-can-i-add-notification-bubble-to-wordpress-admin-menu
+		 */
 
 		$labels = array(
 			'name'               => _x( 'Booking', 'post type general name', RESTAURANT_BOOKING_TEXTDOMAIN ),
@@ -164,7 +171,8 @@ class Initial_Value {
 			'search_items'       => __( 'Search Booking', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'parent_item_colon'  => __( 'Parent Booking:', RESTAURANT_BOOKING_TEXTDOMAIN ),
 			'not_found'          => __( 'No Booking found', RESTAURANT_BOOKING_TEXTDOMAIN ),
-			'not_found_in_trash' => __( 'No Booking found in Trash', RESTAURANT_BOOKING_TEXTDOMAIN )
+			'not_found_in_trash' => __( 'No Booking found in Trash', RESTAURANT_BOOKING_TEXTDOMAIN ),
+
 		);
 
 		$args          = array(

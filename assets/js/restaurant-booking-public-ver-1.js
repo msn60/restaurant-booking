@@ -69,15 +69,22 @@ function show_conditional_reservation($result) {
     h2_element.innerHTML = 'Only one step to complete your reservation!!!';
     let h3_element = document.createElement('h3');
     h3_element.innerHTML = 'Please select your food:';
-    msn_conditional_reservation.insertBefore(h3_element,msn_conditional_reservation.childNodes[0]);
-    msn_conditional_reservation.insertBefore(p_element3,msn_conditional_reservation.childNodes[0]);
-    msn_conditional_reservation.insertBefore(p_element2,msn_conditional_reservation.childNodes[0]);
-    msn_conditional_reservation.insertBefore(p_element1,msn_conditional_reservation.childNodes[0]);
-    msn_conditional_reservation.insertBefore(h2_element,msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(h3_element, msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(p_element3, msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(p_element2, msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(p_element1, msn_conditional_reservation.childNodes[0]);
+    msn_conditional_reservation.insertBefore(h2_element, msn_conditional_reservation.childNodes[0]);
 
 
+}
 
+function get_local_store(name) {
+    return JSON.parse(localStorage.getItem(name));
+}
 
+function update_local_store(name, store) {
+
+    localStorage.setItem(name, JSON.stringify(store));
 }
 
 function reload_google_reptcha() {
@@ -118,10 +125,13 @@ function send_booking_request(e) {
             //reload_google_reptcha();
             msn_booking_form.remove();
             if (result.reserve_id) {
-                if ("Completed" === result.confirmation_status) {
-                    show_reservation_detail(result);
-                }
-                if ("Uncompleted" == result.confirmation_status) {
+                if (parseInt(result.guest_count) <= 10) {
+                    update_local_store('msn_reservation_detail', result);
+                    //show_reservation_detail(result);
+                    //show_reservation_detail(get_local_store('msn_reservation_detail'));
+                    show_conditional_reservation(result);
+                    console.log(result);
+                } else {
                     show_conditional_reservation(result);
                     console.log(result);
                 }

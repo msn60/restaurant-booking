@@ -5,15 +5,25 @@
         <div id="msn_conditional_reservation" class="msn-display-none">
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
-                    <input type="button" name="msn_persian_food" id="msn_persian_food" class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                    <input type="button" name="msn_persian_food" id="msn_persian_food"
+                           class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
                            value="Select Persian Foods">
                 </div>
             </div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
-                    <input type="button" name="msn_persian_food" id="msn_persian_food" class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                    <input type="button" name="msn_persian_food" id="msn_persian_food"
+                           class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
                            value="Select Indian Foods">
                 </div>
+            </div>
+        </div>
+        <div id="msn_normal_reservation" class="msn-display-none">
+            <div class="form-row msn-submit-row">
+                <a href="#" id="msn_normal_add_to_cart"
+                   class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button msn-add-to-cart">
+                    Complete your reservation now
+                </a>
             </div>
         </div>
         <!-- TODO: add auto complete to form and its elements -->

@@ -501,10 +501,12 @@ div#msn_reservation_detail {
     text-transform: none !important;
 }
 
-#msn_error_message p, #msn_reservation_detail p, #msn_conditional_reservation p {
+#msn_error_message p, #msn_reservation_detail p, #msn_conditional_reservation p, #msn_normal_reservation p {
     color: blue;
     font-size: 1.1rem;
     line-height: 1.8rem;
+    margin: 5px;
+    text-align: center;
 }
 
 .msn-reservation-detail-box {
@@ -525,7 +527,19 @@ div#msn_reservation_detail {
     cursor: grab;
 }
 
-#msn_conditional_reservation h2 {
+#msn_normal_reservation a.msn-add-to-cart {
+    width: 70%;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    border-radius: 10px;
+    cursor: grab;
+    display: inline-block;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+#msn_conditional_reservation h2, #msn_normal_reservation h2 {
     border: 3px solid red;
     border-radius: 10px;
     padding: 1.2rem;
@@ -536,14 +550,15 @@ div#msn_reservation_detail {
     margin: 1rem;
 }
 
-#msn_conditional_reservation h3 {
-    padding: 2rem;
+#msn_conditional_reservation h3, #msn_normal_reservation h3 {
+    padding: 1rem;
     text-align: center;
     line-height: 3rem !important;
     font-family: "Lato-Regular", Arial, sans-serif !important;
 }
 
-#msn_conditional_reservation .msn-submit-row.form-row .form-holder {
+#msn_conditional_reservation .msn-submit-row.form-row .form-holder,
+#msn_normal_reservation .msn-submit-row.form-row .form-holder {
     width: 70% !important;
 }
 
