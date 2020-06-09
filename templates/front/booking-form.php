@@ -52,9 +52,14 @@
                         <input type="email" name="email" id="email" class="form-control" placeholder="Email Address"
                                required>
                     </div>
-                    <div class="form-holder">
+                    <!--<div class="form-holder">
                         <i class="zmdi zmdi-phone"></i>
                         <input type="text" name="phone_number" id="phone_number" class="form-control"
+                               placeholder="Your phone number" required>
+                    </div>-->
+                    <div class="form-holder">
+                        <i class="zmdi zmdi-phone"></i>
+                        <input type="tel" name="phone_number" id="phone_number" class="msn-intel-phone"
                                placeholder="Your phone number" required>
                     </div>
                 </div>

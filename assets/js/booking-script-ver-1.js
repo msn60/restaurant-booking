@@ -128,11 +128,12 @@ function send_booking_request(e) {
     msn_error_message.classList.add('msn-display-none');
     msn_error_message.innerHTML = '';
 
-
+    let main_phone_prefix = document.querySelector(".iti__selected-dial-code").innerText;
+    let full_phone_number =  main_phone_prefix + '-' + document.getElementById("phone_number").value;
     const data = new FormData(msn_booking_form);
     data.append('action', 'msn_booking_ajax_call');
     data.append('security', global_booking_data.ajax_nonce);
-    data.append('msn_ajax_sample', global_booking_data.msn_ajax_sample);
+    data.append('full_phone_number', full_phone_number );
 
 
     fetch(global_booking_data.ajax_url, {
@@ -178,13 +179,18 @@ function init() {
     document.getElementById('reservation_name').value = 'Amghezi';
     document.getElementById('guest_count').value = 9;
     document.getElementById('email').value = 'mehdi.soltani666@gmail.com';
-    document.getElementById('phone_number').value = '02144814546';
+    document.getElementById('phone_number').value = '2144814546';
     document.getElementById('date').value = '2020-05-11';
     document.getElementById('time').value = '16:30';
+
+
+
+
 
     submit_button.addEventListener('click', send_booking_request);
 
 }
+
 
 //TODO: only use recaptcha in this file (not in separated file)
 let submit_button = document.getElementById('first_submit');
@@ -196,3 +202,4 @@ let msn_conditional_reservation = document.getElementById('msn_conditional_reser
 let msn_normal_reservation = document.getElementById('msn_normal_reservation');
 // https://nayeb.local/wp-json/wc/v3/products?per_page=20&consumer_key=ck_cb0f7a9a7adcf29b3066fc2bee4d344f1234daba&consumer_secret=cs_008c2a10c302258236fd21f51c026f0c7118beec
 document.addEventListener("DOMContentLoaded", init);
+

@@ -159,7 +159,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		$this->reservation_name = sanitize_text_field( $inputs['reservation_name'] );
 		$this->guest_count      = (int) sanitize_text_field( $inputs['guest_count'] );
 		$this->email_address    = sanitize_email( $inputs['email'] );
-		$this->phone_number     = sanitize_text_field( $inputs['phone_number'] );
+		$this->phone_number     = sanitize_text_field( $inputs['full_phone_number'] );
 		$this->date             = sanitize_text_field( $inputs['date'] );
 		$this->time             = sanitize_text_field( $inputs['time'] );
 	}

@@ -100,6 +100,13 @@ class Booking_Shortcode extends Shortcode {
 			'all'
 		);
 		wp_enqueue_style(
+			'msn-international-phone-numbers-styles',
+			RESTAURANT_BOOKING_ASSETS . 'vendor/intel-tel/css/intlTelInput.css',
+			array(),
+			null,
+			'all'
+		);
+		wp_enqueue_style(
 			'msn-booking-main-style',
 			RESTAURANT_BOOKING_CSS . 'booking-style-ver-1.css',
 			array(),
@@ -143,6 +150,28 @@ class Booking_Shortcode extends Shortcode {
 		);*/
 		//add_filter( 'script_loader_tag', [ $this, 'add_jquery_cdn_attributes' ], 10, 3 );
 		//wp_add_inline_script( 'jquery-3.5.1', 'var jQuery3_5_1 = $.noConflict(true);' );
+		wp_enqueue_script(
+			'msn-international-phone-numbers-script',
+			RESTAURANT_BOOKING_ASSETS . 'vendor/intel-tel/js/intlTelInput.js',
+			null,
+			null,
+			true
+		);
+
+		wp_enqueue_script(
+			'msn-ghanbar-gholam-script',
+			RESTAURANT_BOOKING_ASSETS . 'vendor/intel-tel/js/main-intel-tel.js',
+			null,
+			null,
+			true
+		);
+		wp_enqueue_script(
+			'msn-international-phone-numbers-utils-script',
+			RESTAURANT_BOOKING_ASSETS . 'vendor/intel-tel/js/utils.js',
+			null,
+			null,
+			true
+		);
 		wp_enqueue_script(
 			'msn-booking-default-date-script',
 			RESTAURANT_BOOKING_ASSETS . 'vendor/date-picker/js/picker.js',

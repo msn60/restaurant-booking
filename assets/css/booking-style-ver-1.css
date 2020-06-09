@@ -570,6 +570,19 @@ div#msn_reservation_detail {
     transition: all 3s ease-in-out;
 }
 
+/*Style for international phone number*/
+.iti.iti--allow-dropdown {
+    width: 100% !important;
+}
+
+input#phone_number {
+    height: 42px !important;
+    border: 1px solid #929292 !important;
+    width: 100% !important;
+    background: none !important;
+    color: #999 !important;
+}
+
 @media (max-width: 991px) {
     .msn-flex-container .steps ul li .step-arrow {
         top: 45%;

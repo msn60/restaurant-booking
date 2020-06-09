@@ -158,6 +158,7 @@ function init() {
 
 }
 
+
 //TODO: only use recaptcha in this file (not in separated file)
 let submit_button = document.getElementById('first_submit');
 let msn_code_part = document.getElementById('msn_pre_code');
