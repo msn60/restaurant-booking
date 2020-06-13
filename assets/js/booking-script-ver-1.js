@@ -129,11 +129,11 @@ function send_booking_request(e) {
     msn_error_message.innerHTML = '';
 
     let main_phone_prefix = document.querySelector(".iti__selected-dial-code").innerText;
-    let full_phone_number =  main_phone_prefix + '-' + document.getElementById("phone_number").value;
+    let full_phone_number = main_phone_prefix + '-' + document.getElementById("phone_number").value;
     const data = new FormData(msn_booking_form);
     data.append('action', 'msn_booking_ajax_call');
     data.append('security', global_booking_data.ajax_nonce);
-    data.append('full_phone_number', full_phone_number );
+    data.append('full_phone_number', full_phone_number);
 
 
     fetch(global_booking_data.ajax_url, {
@@ -161,6 +161,7 @@ function send_booking_request(e) {
                     show_normal_reservation(result);
                     console.log(result);
                 } else {
+                    update_local_store('msn_reservation_detail', result);
                     show_conditional_reservation(result);
                     console.log(result);
                 }
@@ -175,19 +176,69 @@ function send_booking_request(e) {
     })
 }
 
+function create_fetch_product_url(type) {
+    switch (type) {
+        case 'persian-food':
+            temp_element = msn_persian_foods_button;
+            break;
+        case 'indian-food':
+            temp_element = msn_indian_foods_button;
+            break;
+        case 'georgian-food':
+            temp_element = msn_georgian_foods_button;
+            break;
+        case 'arabian-food':
+            temp_element = msn_arabian_foods_button;
+            break;
+        case 'dessert':
+            temp_element = msn_dessert_button;
+            break;
+        case 'salad':
+            temp_element = msn_salad_button;
+            break;
+        default:
+            temp_element = 'error';
+    }
+    let msn_reserve_information_object = get_local_store('msn_reservation_detail');
+
+    if ('error' !== temp_element) {
+        if ('local' === msn_reserve_information_object.host_type) {
+            request_url = 'https://nayeb.local/wp-json/wc/v3/products/?category=' + temp_element.getAttribute("data-foodCategoryLocalId") +
+                '&per_page=100&consumer_key=' + msn_reserve_information_object.consumer_key + '&consumer_secret=' + msn_reserve_information_object.consumer_secret;
+        } else {
+            request_url = 'https://nayebrestaurant.com/wp-json/wc/v3/products/?category=' + temp_element.getAttribute("data-foodCategoryOnlineId") +
+                '&per_page=100&consumer_key=' + msn_reserve_information_object.consumer_key + '&consumer_secret=' + msn_reserve_information_object.consumer_secret;
+        }
+        return request_url;
+    } else {
+        return 'fetch-url-error';
+    }
+
+}
+
+function send_persian_food_request(e) {
+    e.preventDefault();
+    console.log(get_local_store('msn_reservation_detail'));
+    request_url = create_fetch_product_url('persian-food');
+    if ( 'fetch-url-error' === request_url ) {
+        console.log('Problem in generating fethch url');
+        alert('Problem in generating fethch url! Please reload this page and send your data again');
+        return false;
+    }
+    console.log(request_url);
+}
+
 function init() {
     document.getElementById('reservation_name').value = 'Amghezi';
-    document.getElementById('guest_count').value = 9;
+    document.getElementById('guest_count').value = 11;
     document.getElementById('email').value = 'mehdi.soltani666@gmail.com';
     document.getElementById('phone_number').value = '2144814546';
-    document.getElementById('date').value = '2020-05-11';
-    document.getElementById('time').value = '16:30';
-
-
-
+    document.getElementById('date').value = '2020-06-23';
+    document.getElementById('time').value = '17:30';
 
 
     submit_button.addEventListener('click', send_booking_request);
+    msn_persian_foods_button.addEventListener('click', send_persian_food_request);
 
 }
 
@@ -200,6 +251,13 @@ let msn_error_message = document.getElementById('msn_error_message');
 let msn_reservation_detail = document.getElementById('msn_reservation_detail');
 let msn_conditional_reservation = document.getElementById('msn_conditional_reservation');
 let msn_normal_reservation = document.getElementById('msn_normal_reservation');
+let msn_persian_foods_button = document.getElementById('msn_persian_food');
+let msn_indian_foods_button = document.getElementById('msn_indian_food');
+let msn_georgian_foods_button = document.getElementById('msn_georgian_food');
+let msn_arabian_foods_button = document.getElementById('msn_arabian_food');
+let msn_dessert_button = document.getElementById('msn_dessert');
+let msn_salad_button = document.getElementById('msn_salad');
+
 // https://nayeb.local/wp-json/wc/v3/products?per_page=20&consumer_key=ck_cb0f7a9a7adcf29b3066fc2bee4d344f1234daba&consumer_secret=cs_008c2a10c302258236fd21f51c026f0c7118beec
 document.addEventListener("DOMContentLoaded", init);
 

@@ -7,16 +7,45 @@
                 <div class="form-holder">
                     <input type="button" name="msn_persian_food" id="msn_persian_food"
                            class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
-                           value="Select Persian Foods">
+                           value="Select Persian Foods" data-foodCategoryLocalId="37" data-foodCategoryOnlineId="29">
                 </div>
             </div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
-                    <input type="button" name="msn_persian_food" id="msn_persian_food"
+                    <input type="button" name="msn_indian_food" id="msn_indian_food"
                            class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
-                           value="Select Indian Foods">
+                           value="Select Indian Foods" data-foodCategoryLocalId="36" data-foodCategoryOnlineId="31">
                 </div>
             </div>
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="button" name="msn_georgian_food" id="msn_georgian_food"
+                           class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                           value="Select Georgian Foods" data-foodCategoryLocalId="35" data-foodCategoryOnlineId="32">
+                </div>
+            </div>
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="button" name="msn_arabian_food" id="msn_arabian_food"
+                           class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                           value="Select Arabian Foods" data-foodCategoryLocalId="32" data-foodCategoryOnlineId="30">
+                </div>
+            </div>
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="button" name="msn_dessert" id="msn_dessert"
+                           class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                           value="Select Dessert" data-foodCategoryLocalId="33" data-foodCategoryOnlineId="26">
+                </div>
+            </div>
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="button" name="msn_salad" id="msn_salad"
+                           class="form-control msn-submit-button msn-color-white msn-bg-red msn-food-button"
+                           value="Select Salad" data-foodCategoryLocalId="38" data-foodCategoryOnlineId="28">
+                </div>
+            </div>
+
         </div>
         <div id="msn_normal_reservation" class="msn-display-none">
             <div class="form-row msn-submit-row">
@@ -85,6 +114,7 @@
 
             </section>
             <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+            <input type="hidden" name="local_environment" id="local_environment">
         </form>
     </div>
 </div>
