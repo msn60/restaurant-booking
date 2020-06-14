@@ -17,7 +17,6 @@
  *
  */
 
-//TODO: increase recaptcha time
 // https://stackoverflow.com/questions/44820652/increase-recaptcha-expiration-time/49908226
 // https://stackoverflow.com/questions/55251837/how-to-solve-google-v3-recaptcha-timeout
 function show_recatpcha_issues(result) {
@@ -159,11 +158,11 @@ function send_booking_request(e) {
                     //show_reservation_detail(result);
                     //show_reservation_detail(get_local_store('msn_reservation_detail'));
                     show_normal_reservation(result);
-                    console.log(result);
+
                 } else {
                     update_local_store('msn_reservation_detail', result);
                     show_conditional_reservation(result);
-                    console.log(result);
+
                 }
             }
 
@@ -216,16 +215,35 @@ function create_fetch_product_url(type) {
 
 }
 
-function send_persian_food_request(e) {
+function send_food_request(e) {
     e.preventDefault();
     console.log(get_local_store('msn_reservation_detail'));
-    request_url = create_fetch_product_url('persian-food');
-    if ( 'fetch-url-error' === request_url ) {
+    food_type = event.currentTarget.attributes.foodType.value;
+    request_url = create_fetch_product_url(food_type);
+    if ('fetch-url-error' === request_url) {
         console.log('Problem in generating fethch url');
         alert('Problem in generating fethch url! Please reload this page and send your data again');
         return false;
     }
     console.log(request_url);
+
+    fetch(request_url, {
+        method: 'GET'
+    }).then(function (response) {
+            if (200 !== parseInt(response.status)) {
+                console.log('Woocommerce Rest API is not available.');
+                alert('Woocommerce Rest API is not available! Please contact us to investigate this issue.');
+            } else {
+                return response.json();
+            }
+        }
+    ).then(function (result) {
+        console.log(result);
+
+    }).catch(function (error) {
+        console.log(error);
+
+    })
 }
 
 function init() {
@@ -238,7 +256,13 @@ function init() {
 
 
     submit_button.addEventListener('click', send_booking_request);
-    msn_persian_foods_button.addEventListener('click', send_persian_food_request);
+    msn_persian_foods_button.addEventListener('click', send_food_request);
+    msn_indian_foods_button.addEventListener('click', send_food_request);
+    msn_georgian_foods_button.addEventListener('click', send_food_request);
+    msn_arabian_foods_button.addEventListener('click', send_food_request);
+    msn_dessert_button.addEventListener('click', send_food_request);
+    msn_salad_button.addEventListener('click', send_food_request);
+
 
 }
 
@@ -251,12 +275,19 @@ let msn_error_message = document.getElementById('msn_error_message');
 let msn_reservation_detail = document.getElementById('msn_reservation_detail');
 let msn_conditional_reservation = document.getElementById('msn_conditional_reservation');
 let msn_normal_reservation = document.getElementById('msn_normal_reservation');
+
 let msn_persian_foods_button = document.getElementById('msn_persian_food');
+msn_persian_foods_button.setAttribute('foodType','persian-food');
 let msn_indian_foods_button = document.getElementById('msn_indian_food');
+msn_indian_foods_button.setAttribute('foodType','indian-food');
 let msn_georgian_foods_button = document.getElementById('msn_georgian_food');
+msn_georgian_foods_button.setAttribute('foodType','georgian-food');
 let msn_arabian_foods_button = document.getElementById('msn_arabian_food');
+msn_arabian_foods_button.setAttribute('foodType','arabian-food');
 let msn_dessert_button = document.getElementById('msn_dessert');
+msn_dessert_button.setAttribute('foodType','dessert');
 let msn_salad_button = document.getElementById('msn_salad');
+msn_salad_button.setAttribute('foodType','salad');
 
 // https://nayeb.local/wp-json/wc/v3/products?per_page=20&consumer_key=ck_cb0f7a9a7adcf29b3066fc2bee4d344f1234daba&consumer_secret=cs_008c2a10c302258236fd21f51c026f0c7118beec
 document.addEventListener("DOMContentLoaded", init);
