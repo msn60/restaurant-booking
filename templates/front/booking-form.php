@@ -10,6 +10,39 @@
                            value="Select Persian Foods" data-foodCategoryLocalId="37" data-foodCategoryOnlineId="29">
                 </div>
             </div>
+            <div id="msn_persian_food_list_section" class="msn-display-none">
+                <section>
+                    <table cellspacing="0"
+                           class="table-cart shop_table shop_table_responsive cart woocommerce-cart-form__contents table"
+                           id="shop_table">
+                        <tbody>
+                        <tr>
+                            <td class="product-thumb">
+                                <img src="https://nayeb.local/wp-content/uploads/2020/04/ROYAL-PLATTERS-large-150x150.jpg" class="item-thumb">
+                            </td>
+                            <td class="product-detail">
+                                <div>
+                                    <span class="msn-product-name">name</span>
+                                </div>
+                            </td>
+                            <td class="product-quantity" data-title="Quantity">
+                                <div class="quantity">
+                                    <input type="number" id="" class="input-text qty text" step="1"
+                                           min="0" max="" name="" value="0"
+                                           title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"/>
+
+                                </div>
+                            </td>
+                            <td class="total-price" data-title="Total Price">
+                                <span class="woocommerce-Price-currencySymbol">&#8382;</span>
+                                <span class="woocommerce-Price-amount amount">70</span>
+                                <span class="woocommerce-Price-currencySymbol"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
                     <input type="button" name="msn_indian_food" id="msn_indian_food"
@@ -17,6 +50,7 @@
                            value="Select Indian Foods" data-foodCategoryLocalId="36" data-foodCategoryOnlineId="31">
                 </div>
             </div>
+            <div id="msn_indian_food_list_section" class="msn-display-none"></div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
                     <input type="button" name="msn_georgian_food" id="msn_georgian_food"
@@ -24,6 +58,7 @@
                            value="Select Georgian Foods" data-foodCategoryLocalId="35" data-foodCategoryOnlineId="32">
                 </div>
             </div>
+            <div id="msn_georgian_food_list_section" class="msn-display-none"></div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
                     <input type="button" name="msn_arabian_food" id="msn_arabian_food"
@@ -31,6 +66,7 @@
                            value="Select Arabian Foods" data-foodCategoryLocalId="32" data-foodCategoryOnlineId="30">
                 </div>
             </div>
+            <div id="msn_arabian_food_list_section" class="msn-display-none"></div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
                     <input type="button" name="msn_dessert" id="msn_dessert"
@@ -38,6 +74,7 @@
                            value="Select Dessert" data-foodCategoryLocalId="33" data-foodCategoryOnlineId="26">
                 </div>
             </div>
+            <div id="msn_dessert_list_section" class="msn-display-none"></div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
                     <input type="button" name="msn_salad" id="msn_salad"
@@ -45,6 +82,7 @@
                            value="Select Salad" data-foodCategoryLocalId="38" data-foodCategoryOnlineId="28">
                 </div>
             </div>
+            <div id="msn_salad_list_section" class="msn-display-none"></div>
 
         </div>
         <div id="msn_normal_reservation" class="msn-display-none">
@@ -72,7 +110,7 @@
                     <div class="form-holder">
                         <i class="zmdi zmdi-account-add"></i>
                         <input type="number" name="guest_count" id="guest_count" class="form-control"
-                               placeholder="Guest count" min="1" max="40" step="1" required>
+                               placeholder="Guest count" min="1" max="40" step="1" pattern="[0-9]*" inputmode="numeric" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -88,8 +126,8 @@
                     </div>-->
                     <div class="form-holder">
                         <i class="zmdi zmdi-phone"></i>
-                        <input type="tel" name="phone_number" id="phone_number" class="msn-intel-phone"
-                               placeholder="Your phone number" required>
+                        <input type="number" name="phone_number" id="phone_number" class="msn-intel-phone"
+                               placeholder="Your phone number" pattern="[0-9]{5,20}" inputmode="numeric" required>
                     </div>
                 </div>
                 <div class="form-row">

@@ -95,7 +95,7 @@ function show_conditional_reservation($result) {
     let h2_element = document.createElement('h2');
     h2_element.innerHTML = 'Only one step to complete your reservation!!!';
     let h3_element = document.createElement('h3');
-    h3_element.innerHTML = 'Please select your food:';
+    h3_element.innerHTML = 'Please select your food & count of each food:';
     msn_conditional_reservation.insertBefore(h3_element, msn_conditional_reservation.childNodes[0]);
     msn_conditional_reservation.insertBefore(p_element3, msn_conditional_reservation.childNodes[0]);
     msn_conditional_reservation.insertBefore(p_element2, msn_conditional_reservation.childNodes[0]);
@@ -215,6 +215,47 @@ function create_fetch_product_url(type) {
 
 }
 
+function create_product_list(items, type) {
+    console.log(items);
+    switch (type) {
+        case 'persian-food':
+            temp_section = msn_persian_food_list_section;
+            temp_remove_item = msn_persian_foods_button;
+            break;
+        case 'indian-food':
+            temp_section = msn_indian_food_list_section;
+            temp_remove_item = msn_indian_foods_button;
+            break;
+        case 'georgian-food':
+            temp_section = msn_georgian_food_list_section;
+            temp_remove_item = msn_georgian_foods_button;
+            break;
+        case 'arabian-food':
+            temp_section = msn_arabian_food_list_section;
+            temp_remove_item = msn_arabian_foods_button;
+            break;
+        case 'dessert':
+            temp_section = msn_dessert_list_section;
+            temp_remove_item = msn_dessert_button;
+            break;
+        case 'salad':
+            temp_section = msn_salad_list_section;
+            temp_remove_item = msn_salad_button;
+            break;
+        default:
+            temp_element = 'error';
+            temp_remove_item = 'error';
+    }
+
+    if ('error' !== temp_element) {
+        temp_remove_item.remove();
+        temp_section.classList.remove('msn-display-none');
+    } else {
+        return false;
+    }
+
+}
+
 function send_food_request(e) {
     e.preventDefault();
     console.log(get_local_store('msn_reservation_detail'));
@@ -238,7 +279,7 @@ function send_food_request(e) {
             }
         }
     ).then(function (result) {
-        console.log(result);
+        create_product_list(result, food_type);
 
     }).catch(function (error) {
         console.log(error);
@@ -277,17 +318,24 @@ let msn_conditional_reservation = document.getElementById('msn_conditional_reser
 let msn_normal_reservation = document.getElementById('msn_normal_reservation');
 
 let msn_persian_foods_button = document.getElementById('msn_persian_food');
-msn_persian_foods_button.setAttribute('foodType','persian-food');
+msn_persian_foods_button.setAttribute('foodType', 'persian-food');
 let msn_indian_foods_button = document.getElementById('msn_indian_food');
-msn_indian_foods_button.setAttribute('foodType','indian-food');
+msn_indian_foods_button.setAttribute('foodType', 'indian-food');
 let msn_georgian_foods_button = document.getElementById('msn_georgian_food');
-msn_georgian_foods_button.setAttribute('foodType','georgian-food');
+msn_georgian_foods_button.setAttribute('foodType', 'georgian-food');
 let msn_arabian_foods_button = document.getElementById('msn_arabian_food');
-msn_arabian_foods_button.setAttribute('foodType','arabian-food');
+msn_arabian_foods_button.setAttribute('foodType', 'arabian-food');
 let msn_dessert_button = document.getElementById('msn_dessert');
-msn_dessert_button.setAttribute('foodType','dessert');
+msn_dessert_button.setAttribute('foodType', 'dessert');
 let msn_salad_button = document.getElementById('msn_salad');
-msn_salad_button.setAttribute('foodType','salad');
+msn_salad_button.setAttribute('foodType', 'salad');
+
+let msn_persian_food_list_section = document.getElementById('msn_persian_food_list_section');
+let msn_indian_food_list_section = document.getElementById('msn_indian_food_list_section');
+let msn_georgian_food_list_section = document.getElementById('msn_georgian_food_list_section');
+let msn_arabian_food_list_section = document.getElementById('msn_arabian_food_list_section');
+let msn_dessert_list_section = document.getElementById('msn_dessert_list_section');
+let msn_salad_list_section = document.getElementById('msn_salad_list_section');
 
 // https://nayeb.local/wp-json/wc/v3/products?per_page=20&consumer_key=ck_cb0f7a9a7adcf29b3066fc2bee4d344f1234daba&consumer_secret=cs_008c2a10c302258236fd21f51c026f0c7118beec
 document.addEventListener("DOMContentLoaded", init);
