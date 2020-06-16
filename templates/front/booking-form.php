@@ -21,19 +21,18 @@
                                 <img src="https://nayeb.local/wp-content/uploads/2020/04/ROYAL-PLATTERS-large-150x150.jpg" class="item-thumb">
                             </td>
                             <td class="product-detail">
-                                <div>
+                                <div data-productId="">
                                     <span class="msn-product-name">name</span>
                                 </div>
                             </td>
                             <td class="product-quantity" data-title="Quantity">
                                 <div class="quantity">
-                                    <input type="number" id="" class="input-text qty text" step="1"
-                                           min="0" max="" name="" value="0"
+                                    <input type="number" id="" class="input-text qty text " min="0" value="0"
                                            title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"/>
 
                                 </div>
                             </td>
-                            <td class="total-price" data-title="Total Price">
+                            <td class="product-price">
                                 <span class="woocommerce-Price-currencySymbol">&#8382;</span>
                                 <span class="woocommerce-Price-amount amount">70</span>
                                 <span class="woocommerce-Price-currencySymbol"></span>
@@ -83,6 +82,12 @@
                 </div>
             </div>
             <div id="msn_salad_list_section" class="msn-display-none"></div>
+            <div class="form-row msn-submit-row">
+                <div class="form-holder">
+                    <input type="submit" name="add_to_cart_more_10" id="add_to_cart_more_10" class="form-control msn-submit-button msn-color-white msn-bg-green"
+                           value="Add to cart to reserve table">
+                </div>
+            </div>
 
         </div>
         <div id="msn_normal_reservation" class="msn-display-none">
@@ -126,7 +131,7 @@
                     </div>-->
                     <div class="form-holder">
                         <i class="zmdi zmdi-phone"></i>
-                        <input type="number" name="phone_number" id="phone_number" class="msn-intel-phone"
+                        <input type="tel" name="phone_number" id="phone_number" class="msn-intel-phone"
                                placeholder="Your phone number" pattern="[0-9]{5,20}" inputmode="numeric" required>
                     </div>
                 </div>

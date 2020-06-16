@@ -85,6 +85,12 @@ function show_normal_reservation(result) {
 }
 
 function show_conditional_reservation($result) {
+    let msn_temp_recaptcha_element = document.createElement('input');
+    msn_temp_recaptcha_element.setAttribute('type', 'hidden');
+    msn_temp_recaptcha_element.setAttribute('name', 'recaptcha_response');
+    msn_temp_recaptcha_element.setAttribute('id', 'recaptchaResponse');
+    msn_conditional_reservation.appendChild(msn_temp_recaptcha_element);
+
     msn_conditional_reservation.classList.remove('msn-display-none');
     let p_element1 = document.createElement('p');
     p_element1.innerHTML = 'Your guest number is greater than 10 person.';
@@ -219,27 +225,27 @@ function create_product_list(items, type) {
     console.log(items);
     switch (type) {
         case 'persian-food':
-            temp_section = msn_persian_food_list_section;
+            temp_main_food_section = msn_persian_food_list_section;
             temp_remove_item = msn_persian_foods_button;
             break;
         case 'indian-food':
-            temp_section = msn_indian_food_list_section;
+            temp_main_food_section = msn_indian_food_list_section;
             temp_remove_item = msn_indian_foods_button;
             break;
         case 'georgian-food':
-            temp_section = msn_georgian_food_list_section;
+            temp_main_food_section = msn_georgian_food_list_section;
             temp_remove_item = msn_georgian_foods_button;
             break;
         case 'arabian-food':
-            temp_section = msn_arabian_food_list_section;
+            temp_main_food_section = msn_arabian_food_list_section;
             temp_remove_item = msn_arabian_foods_button;
             break;
         case 'dessert':
-            temp_section = msn_dessert_list_section;
+            temp_main_food_section = msn_dessert_list_section;
             temp_remove_item = msn_dessert_button;
             break;
         case 'salad':
-            temp_section = msn_salad_list_section;
+            temp_main_food_section = msn_salad_list_section;
             temp_remove_item = msn_salad_button;
             break;
         default:
@@ -249,7 +255,46 @@ function create_product_list(items, type) {
 
     if ('error' !== temp_element) {
         temp_remove_item.remove();
-        temp_section.classList.remove('msn-display-none');
+        temp_main_food_section.classList.remove('msn-display-none');
+        let temp_tbody_element = document.createElement('tbody');
+        items.forEach(function (item) {
+            let temp_tr_element = document.createElement('tr');
+            temp_tr_element.setAttribute('class', 'msn-product-row');
+
+            /*Add product thumbnail*/
+            let temp_first_td_element = document.createElement('td');
+            temp_first_td_element.setAttribute('class', 'product-thumb');
+            let temp_img_element = document.createElement('img');
+            let temp_thumbnail_src = item.images[0].src.replace('.jpg', '') + '-150x150.jpg';
+            temp_img_element.setAttribute('src', temp_thumbnail_src);
+            temp_img_element.setAttribute('class', 'item-thumb');
+            temp_first_td_element.appendChild(temp_img_element);
+            temp_tr_element.appendChild(temp_first_td_element);
+            /*Add product detail*/
+            let temp_second_td_element = document.createElement('td');
+            temp_second_td_element.setAttribute('class', 'product-detail');
+            temp_second_td_element.setAttribute('data-productid', item.id);
+            let temp_div_inside_second_td_element = document.createElement('div');
+            let temp_product_name = document.createTextNode(item.name);
+            let temp_span_element_inside_second_td_element = document.createElement('span');
+            temp_span_element_inside_second_td_element.setAttribute('class', 'msn-product-name');
+            temp_span_element_inside_second_td_element.appendChild(temp_product_name);
+            temp_div_inside_second_td_element.appendChild(temp_span_element_inside_second_td_element);
+            temp_second_td_element.appendChild(temp_div_inside_second_td_element);
+            temp_tr_element.appendChild(temp_second_td_element);
+
+            temp_tbody_element.appendChild(temp_tr_element);
+        });
+        let temp_table_element = document.createElement('table');
+        temp_table_element.setAttribute('class', 'table-cart shop_table shop_table_responsive cart woocommerce-cart-form__contents table');
+        temp_table_element.setAttribute('cellspacing','0');
+        temp_table_element.setAttribute('id','shop_table');
+        temp_table_element.appendChild(temp_tbody_element);
+        let temp_section_element = document.createElement('section');
+        temp_section_element.appendChild(temp_table_element);
+        temp_main_food_section.appendChild(temp_section_element);
+
+
     } else {
         return false;
     }

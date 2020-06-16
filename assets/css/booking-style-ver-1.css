@@ -468,6 +468,10 @@ span.msn-product-name {
     background-color: #ef394e !important;
 }
 
+.msn-bg-green {
+    background-color: #0e9a0e !important;
+}
+
 .form-control.msn-color-white {
     color: white !important;
 }
@@ -584,12 +588,16 @@ div#msn_reservation_detail {
     width: 100% !important;
 }
 
+.iti--allow-dropdown .iti__flag-container, .iti--separate-dial-code .iti__flag-container {
+    width: 95px !important;
+}
+
 input#phone_number {
     height: 42px !important;
     border: 1px solid #929292 !important;
     width: 100% !important;
     background: none !important;
-    padding: 0 35px 0 56px !important;
+    padding: 0 35px 0 100px !important;
     color: #999 !important;
 }
 
