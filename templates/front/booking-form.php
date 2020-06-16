@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div id="msn_persian_food_list_section" class="msn-display-none">
-                <section>
+                <!--<section>
                     <table cellspacing="0"
                            class="table-cart shop_table shop_table_responsive cart woocommerce-cart-form__contents table"
                            id="shop_table">
@@ -40,7 +40,7 @@
                         </tr>
                         </tbody>
                     </table>
-                </section>
+                </section>-->
             </div>
             <div class="form-row msn-submit-row">
                 <div class="form-holder">

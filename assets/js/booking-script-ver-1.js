@@ -282,13 +282,44 @@ function create_product_list(items, type) {
             temp_div_inside_second_td_element.appendChild(temp_span_element_inside_second_td_element);
             temp_second_td_element.appendChild(temp_div_inside_second_td_element);
             temp_tr_element.appendChild(temp_second_td_element);
+            /*Add product quantity*/
+            let temp_third_td_element = document.createElement('td');
+            temp_third_td_element.setAttribute('class', 'product-quantity');
+            let temp_div_inside_third_td_element = document.createElement('div');
+            temp_div_inside_third_td_element.setAttribute('class', 'quantity');
+            let temp_number_input = document.createElement('input');
+            temp_number_input.setAttribute('type', 'number');
+            temp_number_input.setAttribute('class', 'input-text qty text msn-product-count');
+            temp_number_input.setAttribute('min', '0');
+            temp_number_input.setAttribute('value', '0');
+            temp_number_input.setAttribute('size', '4');
+            temp_number_input.setAttribute('title', 'Qty');
+            temp_number_input.setAttribute('pattern', '[0-9]*');
+            temp_number_input.setAttribute('inputmode', 'numeric');
+            temp_div_inside_third_td_element.appendChild(temp_number_input);
+            temp_third_td_element.appendChild(temp_div_inside_third_td_element);
+            temp_tr_element.appendChild(temp_third_td_element);
+            /*Add product price*/
+            let temp_forth_td_element = document.createElement('td');
+            temp_forth_td_element.setAttribute('class', 'product-price');
+            let temp_currency_symbol_element = document.createElement('span');
+            temp_currency_symbol_element.setAttribute('class', 'woocommerce-Price-currencySymbol');
+            let temp_currency_value = document.createTextNode('\u20BE');
+            temp_currency_symbol_element.appendChild(temp_currency_value);
+            temp_forth_td_element.appendChild(temp_currency_symbol_element);
+            let temp_price_amount_element = document.createElement('span');
+            temp_price_amount_element.setAttribute('class', 'woocommerce-Price-amount amount');
+            let temp_price_amount_value = document.createTextNode(item.price);
+            temp_price_amount_element.appendChild(temp_price_amount_value);
+            temp_forth_td_element.appendChild(temp_price_amount_element);
+            temp_tr_element.appendChild(temp_forth_td_element);
 
             temp_tbody_element.appendChild(temp_tr_element);
         });
         let temp_table_element = document.createElement('table');
         temp_table_element.setAttribute('class', 'table-cart shop_table shop_table_responsive cart woocommerce-cart-form__contents table');
-        temp_table_element.setAttribute('cellspacing','0');
-        temp_table_element.setAttribute('id','shop_table');
+        temp_table_element.setAttribute('cellspacing', '0');
+        temp_table_element.setAttribute('id', 'shop_table');
         temp_table_element.appendChild(temp_tbody_element);
         let temp_section_element = document.createElement('section');
         temp_section_element.appendChild(temp_table_element);
@@ -311,7 +342,6 @@ function send_food_request(e) {
         alert('Problem in generating fethch url! Please reload this page and send your data again');
         return false;
     }
-    console.log(request_url);
 
     fetch(request_url, {
         method: 'GET'
