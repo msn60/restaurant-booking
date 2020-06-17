@@ -213,7 +213,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			$this->custom_posts = $this->check_array_by_parent_type( $custom_posts, Custom_Post_Type::class )['valid'];;
 		}
 
-		if ( ! is_null( $cmb2_boxes) ) {
+		if ( ! is_null( $cmb2_boxes ) ) {
 			$this->cmb2_boxes = $this->check_array_by_parent_type( $cmb2_boxes, CMB2_Fields::class )['valid'];;
 		}
 		if ( ! is_null( $admin_notices ) ) {
@@ -233,7 +233,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 */
 	public function init_core() {
 		$this->register_add_action();
-		//$this->register_add_filter();
+		$this->register_add_filter();
 		$this->set_shortcodes();
 
 		$this->set_custom_posts();
@@ -296,7 +296,17 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	 *
 	 */
 	public function register_add_filter() {
-		//TODO: for future
+		//remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 999 );
+		//TODO: work on label in future
+		/*
+		 * https://gist.github.com/maxrice/8550827
+		 * https://awhitepixel.com/blog/woocommerce-checkout-programatically-add-custom-discount/
+		 * */
+		add_filter( 'woocommerce_cart_totals_coupon_label', [$this, 'hide_coupon_code'], 99, 2 );
+	}
+
+	public function hide_coupon_code($label, $coupon) {
+		return 'Coupon Applied!';
 	}
 
 	/**
@@ -309,20 +319,6 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		if ( ! is_null( $this->shortcodes ) ) {
 			foreach ( $this->shortcodes as $shortcode ) {
 				$shortcode->register_add_action();
-			}
-		}
-	}
-
-	/**
-	 * Method to set all of needed shortcodes for your plugin
-	 *
-	 * @access private
-	 * @since  1.0.1
-	 */
-	private function set_ajax_call() {
-		if ( ! is_null( $this->ajax_calls) ) {
-			foreach ( $this->ajax_calls as $ajax_call ) {
-				$ajax_call->register_add_action();
 			}
 		}
 	}
@@ -343,12 +339,25 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 
 	private function set_cmb2_boxes() {
 		if ( ! is_null( $this->cmb2_boxes ) ) {
-			foreach ( $this->cmb2_boxes as $cmb_2_box) {
+			foreach ( $this->cmb2_boxes as $cmb_2_box ) {
 				$cmb_2_box->register_add_action();
 			}
 		}
 	}
 
+	/**
+	 * Method to set all of needed shortcodes for your plugin
+	 *
+	 * @access private
+	 * @since  1.0.1
+	 */
+	private function set_ajax_call() {
+		if ( ! is_null( $this->ajax_calls ) ) {
+			foreach ( $this->ajax_calls as $ajax_call ) {
+				$ajax_call->register_add_action();
+			}
+		}
+	}
 
 	/**
 	 * Method to show all of needed admin notice in admin panel

@@ -371,7 +371,11 @@ function send_conditional_booking_request(e) {
         }
 
     });
+    //msn_request_url += '&coupon_code=msn-booking-discount';
+    msn_request_url += '&coupon_code=test';
     console.log(msn_request_url);
+    window.location.href = msn_request_url;
+    //window.location.replace(msn_request_url);
 }
 
 function init() {
