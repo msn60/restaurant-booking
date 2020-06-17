@@ -85,7 +85,7 @@
             <div class="form-row msn-submit-row">
                 <div class="form-holder">
                     <input type="submit" name="add_to_cart_more_10" id="add_to_cart_more_10" class="form-control msn-submit-button msn-color-white msn-bg-green"
-                           value="Add to cart to reserve table">
+                           value="Complete your table reservation">
                 </div>
             </div>
 

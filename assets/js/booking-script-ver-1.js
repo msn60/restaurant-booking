@@ -36,24 +36,14 @@ function show_recatpcha_issues(result) {
 
 }
 
-function show_reservation_detail(result) {
+function create_recaptcha_element(temp_element) {
+    /*solve uncaught type error in console for google recaptcha*/
+    let msn_temp_recaptcha_element = document.createElement('input');
+    msn_temp_recaptcha_element.setAttribute('type', 'hidden');
+    msn_temp_recaptcha_element.setAttribute('name', 'recaptcha_response');
+    msn_temp_recaptcha_element.setAttribute('id', 'recaptchaResponse');
+    temp_element.appendChild(msn_temp_recaptcha_element);
 
-    msn_reservation_detail.classList.remove('msn-display-none');
-    let p_element = document.createElement('p');
-    p_element.innerHTML = 'This is detail information of your booking';
-    let h2_element = document.createElement('h2');
-    h2_element.innerHTML = 'Your table booking was successful';
-    let main_detail_div_element = document.createElement('div');
-    main_detail_div_element.classList.add('msn-reservation-detail-box');
-    let temp_element;
-    for (const [key, value] of Object.entries(result)) {
-        temp_element = document.createElement('p');
-        temp_element.innerHTML = key + ' : ' + value;
-        main_detail_div_element.appendChild(temp_element);
-    }
-    msn_reservation_detail.appendChild(h2_element);
-    msn_reservation_detail.appendChild(p_element);
-    msn_reservation_detail.appendChild(main_detail_div_element);
 }
 
 /**
@@ -63,6 +53,7 @@ function show_reservation_detail(result) {
  * @see https://businessbloomer.com/woocommerce-custom-add-cart-urls-ultimate-guide/
  */
 function show_normal_reservation(result) {
+    create_recaptcha_element(msn_normal_reservation);
     msn_normal_reservation.classList.remove('msn-display-none');
     let p_element1 = document.createElement('p');
     p_element1.innerHTML = 'So you need to pay before register your reservation.';
@@ -80,16 +71,13 @@ function show_normal_reservation(result) {
     msn_normal_reservation.insertBefore(p_element1, msn_normal_reservation.childNodes[0]);
     msn_normal_reservation.insertBefore(h3_element, msn_normal_reservation.childNodes[0]);
     msn_normal_reservation.insertBefore(h2_element, msn_normal_reservation.childNodes[0]);
-    document.getElementById('msn_normal_add_to_cart').setAttribute('href', '/checkout/?add-to-cart=' + result.table_reservation_product_id + '&quantity=' + result.guest_count)
+    document.getElementById('msn_normal_add_to_cart').setAttribute('href', '/checkout/?add-to-cart=' + result.normal_table_reservation_product_id + '&quantity=' + result.guest_count);
+
 
 }
 
 function show_conditional_reservation($result) {
-    let msn_temp_recaptcha_element = document.createElement('input');
-    msn_temp_recaptcha_element.setAttribute('type', 'hidden');
-    msn_temp_recaptcha_element.setAttribute('name', 'recaptcha_response');
-    msn_temp_recaptcha_element.setAttribute('id', 'recaptchaResponse');
-    msn_conditional_reservation.appendChild(msn_temp_recaptcha_element);
+    create_recaptcha_element(msn_conditional_reservation);
 
     msn_conditional_reservation.classList.remove('msn-display-none');
     let p_element1 = document.createElement('p');
@@ -128,6 +116,7 @@ function reload_google_reptcha() {
 }
 
 function send_booking_request(e) {
+    //TODO: loading icon to show ajax process
     e.preventDefault();
     //TODO: check guest count before sending
     msn_error_message.classList.add('msn-display-none');
@@ -333,6 +322,7 @@ function create_product_list(items, type) {
 }
 
 function send_food_request(e) {
+    //TODO: loading icon to show ajax process
     e.preventDefault();
     console.log(get_local_store('msn_reservation_detail'));
     food_type = event.currentTarget.attributes.foodType.value;
@@ -362,6 +352,28 @@ function send_food_request(e) {
     })
 }
 
+function send_conditional_booking_request(e) {
+    //TODO: loading icon to show ajax process
+    e.preventDefault();
+    let msn_reserve_information_object = get_local_store('msn_reservation_detail');
+    if ('local' === msn_reserve_information_object.host_type) {
+        msn_request_url = 'https://nayeb.local/checkout/?add-to-cart=' + msn_reserve_information_object.conditional_table_reservation_product_id;
+    } else {
+        msn_request_url = 'https://nayebrestaurant.com/checkout/?add-to-cart=' + msn_reserve_information_object.conditional_table_reservation_product_id;
+    }
+
+    let msn_all_product_rows = document.querySelectorAll('.msn-product-row');
+    msn_all_product_rows.forEach(function (row) {
+        let temp_product_id = row.getElementsByClassName("product-detail")[0].getAttribute('data-productid');
+        let temp_product_count = row.getElementsByClassName("msn-product-count")[0].value;
+        if ( 0 !== parseInt(temp_product_count)) {
+            msn_request_url += '&quantity[' + temp_product_id + ']=' + temp_product_count;
+        }
+
+    });
+    console.log(msn_request_url);
+}
+
 function init() {
     document.getElementById('reservation_name').value = 'Amghezi';
     document.getElementById('guest_count').value = 11;
@@ -378,6 +390,8 @@ function init() {
     msn_arabian_foods_button.addEventListener('click', send_food_request);
     msn_dessert_button.addEventListener('click', send_food_request);
     msn_salad_button.addEventListener('click', send_food_request);
+
+    msn_add_to_cart_more_10.addEventListener('click', send_conditional_booking_request);
 
 
 }
@@ -411,6 +425,8 @@ let msn_georgian_food_list_section = document.getElementById('msn_georgian_food_
 let msn_arabian_food_list_section = document.getElementById('msn_arabian_food_list_section');
 let msn_dessert_list_section = document.getElementById('msn_dessert_list_section');
 let msn_salad_list_section = document.getElementById('msn_salad_list_section');
+
+let msn_add_to_cart_more_10 = document.getElementById('add_to_cart_more_10');
 
 // https://nayeb.local/wp-json/wc/v3/products?per_page=20&consumer_key=ck_cb0f7a9a7adcf29b3066fc2bee4d344f1234daba&consumer_secret=cs_008c2a10c302258236fd21f51c026f0c7118beec
 document.addEventListener("DOMContentLoaded", init);

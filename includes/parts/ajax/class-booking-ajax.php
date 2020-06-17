@@ -45,7 +45,8 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 	protected $consumer_key;
 	protected $consumer_secret;
 	protected $host_type;
-	protected $table_reservation_product_id;
+	protected $normal_table_reservation_product_id;
+	protected $conditional_table_reservation_product_id;
 	protected $table_reservation_product_price;
 
 	/**
@@ -62,8 +63,9 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		//TODO: put it in setting
 		$this->default_comparing_guest_count = 10;
 		//TODO: put it in setting
-		$this->table_reservation_product_id    = 2135;
-		$this->table_reservation_product_price = get_post_meta( $this->table_reservation_product_id, '_regular_price', true );
+		//$this->table_reservation_product_price = get_post_meta( $this->normal_table_reservation_product_id, '_regular_price', true );
+		$this->table_reservation_product_price = 10;
+
 		$this->confirmation_status             = 'Uncompleted';
 
 	}
@@ -127,6 +129,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 			// Take action based on the score returned:
 			if ( $recaptcha->score >= 0.5 ) {
 				$this->set_rest_keys( $_POST );
+				$this->set_bookable_product_id();
 				$this->sanitize_input_fields( $_POST );
 				$this->check_guest_number();
 				//$this->set_confirmation_status();
@@ -160,12 +163,27 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		if ( isset( $_POST ) && ! empty( $_POST ) && isset( $_POST['local_environment'] ) ) {
 			$this->consumer_key    = 'ck_9ee08c94c8ec32eb0977b36d0290184ee5253029';
 			$this->consumer_secret = 'cs_d0770dba19b6758c67c5e9b61268543be5cceb4b';
-			$this->host_type = 'local';
+			$this->host_type       = 'local';
+
 		} else {
 			$this->consumer_key    = 'ck_258a8a97b221735d1004773b51dc2dcead32effc';
 			$this->consumer_secret = 'cs_8cf586d04528e595bc97054944c6889eaa1479e4';
-			$this->host_type = 'online';
+			$this->host_type       = 'online';
 		}
+	}
+
+	private function set_bookable_product_id() {
+		if ( 'local' === $this->host_type ) {
+			//TODO: put it in setting
+			$this->normal_table_reservation_product_id = 2135;
+			$this->conditional_table_reservation_product_id = 2595;
+
+		} else {
+			//TODO: put it in setting
+			$this->normal_table_reservation_product_id = 2868;
+			$this->conditional_table_reservation_product_id = 2940;
+		}
+
 	}
 
 	private function sanitize_input_fields( $inputs ) {
@@ -243,7 +261,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 			unset( $temp_object->consumer_secret );
 		}
 		unset( $temp_object->default_comparing_guest_count );
-		setcookie( "msn_reserve_id", $this->post_id, time() + ( 86400 * 2 ), "/" );
+		setcookie( "msn_reserve_id", $this->post_id, time() + ( 3600 * 2 ), "/" );
 		wp_die( json_encode( $temp_object ) );
 	}
 
