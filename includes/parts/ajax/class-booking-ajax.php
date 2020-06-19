@@ -262,6 +262,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		}
 		unset( $temp_object->default_comparing_guest_count );
 		setcookie( "msn_reserve_id", $this->post_id, time() + ( 3600 * 2 ), "/" );
+		setcookie( "msn_checkout_type", 'booking', time() + ( 3600 * 15 ), "/" );
 		wp_die( json_encode( $temp_object ) );
 	}
 

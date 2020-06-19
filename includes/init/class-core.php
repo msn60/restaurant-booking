@@ -140,6 +140,11 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 	protected $is_need_run_init_test = false;
 
 	/**
+	 * @var array $booking_cookie Value to check state of booking in checkout page
+	 */
+	protected $booking_cookie;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -218,6 +223,14 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		}
 		if ( ! is_null( $admin_notices ) ) {
 			$this->admin_notices = $this->check_array_by_parent_type_assoc( $admin_notices, Admin_Notice::class )['valid'];;
+		}
+
+		//TODO: hook after successful payment to remove this cookie
+		if ( isset( $_COOKIE ) && ! empty( $_COOKIE ) && isset( $_COOKIE['msn_checkout_type'] ) ) {
+			$this->booking_cookie['msn_checkout_type'] = $_COOKIE['msn_checkout_type'];
+			$this->booking_cookie['msn_reserve_id'] = $_COOKIE['msn_reserve_id'];
+		} else {
+			$this->booking_cookie['msn_checkout_type'] = 'normal';
 		}
 
 	}
@@ -302,11 +315,8 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		 * https://gist.github.com/maxrice/8550827
 		 * https://awhitepixel.com/blog/woocommerce-checkout-programatically-add-custom-discount/
 		 * */
-		add_filter( 'woocommerce_cart_totals_coupon_label', [$this, 'hide_coupon_code'], 99, 2 );
-	}
-
-	public function hide_coupon_code($label, $coupon) {
-		return 'Coupon Applied!';
+		add_filter( 'woocommerce_cart_totals_coupon_label', [ $this, 'hide_coupon_code' ], 99, 2 );
+		add_filter( 'woocommerce_checkout_fields', [ $this, 'remove_extra_checkout_field' ] );
 	}
 
 	/**
@@ -378,6 +388,66 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Method to hide coupon code in checkout and cart page
+	 *
+	 * @param $label
+	 * @param $coupon
+	 *
+	 * @return string
+	 */
+	public function hide_coupon_code( $label, $coupon ) {
+		return 'Coupon Applied!';
+	}
+
+	/**
+	 * Method to remove checkout field based on type of checkout
+	 * @param $fields
+	 *
+	 * @return mixed
+	 *
+	 * @see https://www.liquidweb.com/kb/way-conditionally-show-hide-checkout-fields-specific-products-product-categories-store/
+	 * @see https://woocommerce.com/posts/customize-checkout-fields-woocommerce/
+	 * @see https://rudrastyh.com/woocommerce/checkout-fields.html
+	 * @see https://remicorson.com/customise-woocommerce-checkout-fields-based-on-products-in-cart/
+	 */
+	public function remove_extra_checkout_field( $fields ) {
+		if ( $this->check_checkout_type_in_the_cart() ) {
+			unset( $fields['billing']['billing_company'] );
+			unset( $fields['billing']['billing_state'] );
+			unset( $fields['billing']['billing_address_2'] );
+			unset( $fields['billing']['billing_postcode'] );
+		} else {
+			$fields['billing']['billing_country']['required'] = false;
+			$fields['billing']['billing_country']['default']  = 'Georgia';
+			unset( $fields['billing']['billing_company'] );
+			unset( $fields['billing']['billing_state'] );
+			unset( $fields['billing']['billing_city'] );
+			unset( $fields['billing']['billing_postcode'] );
+			$fields['billing']['billing_address_1']['label'] = 'Address';
+			$fields['billing']['billing_address_2']['label'] = 'Additional on address';
+
+		}
+		$fields['billing']['billing_phone']['required'] = true;
+		$fields['billing']['billing_phone']['required'] = true;
+		$fields['billing']['billing_phone']['placeholder'] = 'put your full phone number: e.g. +44357654321';
+
+		return $fields;
+	}
+
+	/**
+	 * Check checkout type to use un-setting some checkout fields based on its type
+	 * @return bool
+	 */
+	public function check_checkout_type_in_the_cart() {
+		if ( 'booking' === $this->booking_cookie['msn_checkout_type'] ) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	/**
