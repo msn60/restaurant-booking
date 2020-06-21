@@ -159,6 +159,7 @@ function send_booking_request(e) {
     msn_error_message.classList.add('msn-display-none');
     msn_error_message.innerHTML = '';
 
+    //TODO: remove prefix if the phone number has country code
     let main_phone_prefix = document.querySelector(".iti__selected-dial-code").innerText;
     let full_phone_number = main_phone_prefix + '-' + document.getElementById("phone_number").value;
     const data = new FormData(msn_booking_form);
@@ -248,7 +249,6 @@ function create_fetch_product_url(type) {
 }
 
 function create_product_list(items, type) {
-    console.log(items);
     switch (type) {
         case 'persian-food':
             temp_main_food_section = msn_persian_food_list_section;
@@ -361,7 +361,7 @@ function create_product_list(items, type) {
 function send_food_request(e) {
     //TODO: loading icon to show ajax process
     e.preventDefault();
-    console.log(get_local_store('msn_reservation_detail'));
+
     food_type = event.currentTarget.attributes.foodType.value;
     request_url = create_fetch_product_url(food_type);
     if ('fetch-url-error' === request_url) {
@@ -408,20 +408,20 @@ function send_conditional_booking_request(e) {
         }
 
     });
-    msn_request_url += '&coupon_code=msn-booking-discount';
-    //msn_request_url += '&coupon_code=test';
-    console.log(msn_request_url);
+    //msn_request_url += '&coupon_code=msn-booking-discount';
+    msn_request_url += '&coupon_code=test';
+
     window.location.href = msn_request_url;
     //window.location.replace(msn_request_url);
 }
 
 function init() {
-    document.getElementById('reservation_name').value = 'Amghezi';
+    /*document.getElementById('reservation_name').value = 'Amghezi';
     document.getElementById('guest_count').value = 11;
     document.getElementById('email').value = 'mehdi.soltani666@gmail.com';
     document.getElementById('phone_number').value = '2144814546';
     document.getElementById('date').value = '2020-06-23';
-    document.getElementById('time').value = '17:30';
+    document.getElementById('time').value = '17:30';*/
 
 
     submit_button.addEventListener('click', send_booking_request);

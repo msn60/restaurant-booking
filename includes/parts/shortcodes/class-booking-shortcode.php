@@ -49,7 +49,9 @@ class Booking_Shortcode extends Shortcode {
 	 * @return string
 	 */
 	public function set_shortcode_handler( $atts = [], $content = null, $tag = '' ) {
+		//TODO: add it to settings
 		$this->recaptcha_site_key = get_option( 'msn_booking_recaptcha_site_key' );
+		//$this->recaptcha_site_key = '6LfpqKcZAAAAAC_Jqv8-d4X6bKf8YF_ZJ_Hw98dw';
 		$this->enqueue_shortcode_styles();
 		$this->enqueue_shortcode_scripts();
 

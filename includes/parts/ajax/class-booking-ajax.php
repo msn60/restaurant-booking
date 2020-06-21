@@ -120,6 +120,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 			$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 			//TODO: Add secret key to setting page
 			$recaptcha_secret   = (string) get_option( 'msn_booking_recaptcha_secret_key' );
+			//$recaptcha_secret   = '6LfpqKcZAAAAAL4owOHeJn39CPGtHuNOSLnS_XnV';
 			$recaptcha_response = $_POST['recaptcha_response'];
 			// Make and decode POST request:
 			$recaptcha = file_get_contents( $recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response );

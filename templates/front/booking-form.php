@@ -157,7 +157,7 @@
 
             </section>
             <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-            <input type="hidden" name="local_environment" id="local_environment">
+            <input type="hidden" name="online_environment" id="local_environment">
         </form>
     </div>
 </div>

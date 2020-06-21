@@ -15,6 +15,7 @@
 
 
 function getReCaptcha() {
+    //6LfpqKcZAAAAAC_Jqv8-d4X6bKf8YF_ZJ_Hw98dw
     grecaptcha.ready(function () {
         grecaptcha.execute('6LfaVvMUAAAAAOPHKXivJXzqh5H-gKUf7f1YBRhA', {action: 'contact'}).then(function (token) {
             var recaptchaResponse = document.getElementById('recaptchaResponse');
