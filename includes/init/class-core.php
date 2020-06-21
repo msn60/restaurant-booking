@@ -228,9 +228,12 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 		//TODO: hook after successful payment to remove this cookie
 		if ( isset( $_COOKIE ) && ! empty( $_COOKIE ) && isset( $_COOKIE['msn_checkout_type'] ) ) {
 			$this->booking_cookie['msn_checkout_type'] = $_COOKIE['msn_checkout_type'];
-			$this->booking_cookie['msn_reserve_id'] = $_COOKIE['msn_reserve_id'];
 		} else {
 			$this->booking_cookie['msn_checkout_type'] = 'normal';
+		}
+
+		if ( isset( $_COOKIE ) && ! empty( $_COOKIE ) && isset( $_COOKIE['msn_reserve_id'] ) ) {
+			$this->booking_cookie['msn_reserve_id']    = $_COOKIE['msn_reserve_id'];
 		}
 
 	}
@@ -404,6 +407,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 
 	/**
 	 * Method to remove checkout field based on type of checkout
+	 *
 	 * @param $fields
 	 *
 	 * @return mixed
@@ -430,8 +434,8 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 			$fields['billing']['billing_address_2']['label'] = 'Additional on address';
 
 		}
-		$fields['billing']['billing_phone']['required'] = true;
-		$fields['billing']['billing_phone']['required'] = true;
+		$fields['billing']['billing_phone']['required']    = true;
+		$fields['billing']['billing_phone']['required']    = true;
 		$fields['billing']['billing_phone']['placeholder'] = 'put your full phone number: e.g. +44357654321';
 
 		return $fields;
@@ -439,6 +443,7 @@ class Core implements Action_Hook_Interface, Filter_Hook_Interface {
 
 	/**
 	 * Check checkout type to use un-setting some checkout fields based on its type
+	 *
 	 * @return bool
 	 */
 	public function check_checkout_type_in_the_cart() {

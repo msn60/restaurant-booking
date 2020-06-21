@@ -200,7 +200,7 @@ class Booking_Ajax extends Ajax implements \JsonSerializable {
 		if ( $this->guest_count <= 0 or $this->guest_count >= 60 ) {
 			$this->return_with_problem(
 				'Guest numbers',
-				'The maximum of guest count can be 40 person. You put out of range guest number. Please refresh the page and try to submit form again.',
+				'The minimum of guest count can be 1 person and maximum of guest count can be 60 person. You put out of range guest number. Please refresh the page and try to submit form again.',
 				false
 			);
 		}

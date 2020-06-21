@@ -14,6 +14,7 @@
  * @see     https://stackoverflow.com/questions/36631762/returning-html-with-fetch
  * @see     https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  * @see     https://wordpress.stackexchange.com/questions/252680/wp-admin-ajax-with-fetch-api-is-done-without-user
+ * @see     https://dmitripavlutin.com/foreach-iterate-array-javascript/
  *
  */
 
@@ -44,6 +45,10 @@ function create_recaptcha_element(temp_element) {
     msn_temp_recaptcha_element.setAttribute('id', 'recaptchaResponse');
     temp_element.appendChild(msn_temp_recaptcha_element);
 
+}
+
+function is_element_value_empty(str) {
+    return !str.trim().length;
 }
 
 /**
@@ -115,9 +120,41 @@ function reload_google_reptcha() {
     });
 }
 
+function check_booking_fields_are_empty(temp_array) {
+    const result = (element) => 0 === parseInt(element.value.trim().length);
+    return temp_array.some(result);
+
+}
+
 function send_booking_request(e) {
     //TODO: loading icon to show ajax process
     e.preventDefault();
+    let msn_temp_check_array = [];
+    let msn_temp_name_field = document.getElementById('reservation_name');
+    msn_temp_check_array.push(msn_temp_name_field);
+    let msn_temp_guest_count_field = document.getElementById('guest_count');
+    msn_temp_check_array.push(msn_temp_guest_count_field);
+    let msn_temp_email_field = document.getElementById('email');
+    msn_temp_check_array.push(msn_temp_email_field);
+    let msn_temp_phone_number_field = document.getElementById('phone_number');
+    msn_temp_check_array.push(msn_temp_phone_number_field);
+    let msn_temp_date_field = document.getElementById('date');
+    msn_temp_check_array.push(msn_temp_date_field);
+    let msn_temp_time_field = document.getElementById('time');
+    msn_temp_check_array.push(msn_temp_time_field);
+
+    /*check filling out all of fields*/
+    if (check_booking_fields_are_empty(msn_temp_check_array)) {
+        window.alert('Please fill out all of fields and then try again');
+        return false;
+    }
+    
+    /*Check that country code is selected*/
+    if ( 0 == document.querySelector('.iti__selected-dial-code').innerText.trim().length) {
+        window.alert('Please select your country code for phone number and then try again');
+        return false
+    }
+
     //TODO: check guest count before sending
     msn_error_message.classList.add('msn-display-none');
     msn_error_message.innerHTML = '';
@@ -366,7 +403,7 @@ function send_conditional_booking_request(e) {
     msn_all_product_rows.forEach(function (row) {
         let temp_product_id = row.getElementsByClassName("product-detail")[0].getAttribute('data-productid');
         let temp_product_count = row.getElementsByClassName("msn-product-count")[0].value;
-        if ( 0 !== parseInt(temp_product_count)) {
+        if (0 !== parseInt(temp_product_count)) {
             msn_request_url += '&quantity[' + temp_product_id + ']=' + temp_product_count;
         }
 
